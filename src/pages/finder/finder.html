@@ -1,0 +1,249 @@
+<!--
+  Generated template for the FinderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>finder</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  Display the scales that relate to notes here
+  
+  <div id = "scalePrinter"></div>
+  <div id = "notesInChordsSelected" style = "color:white"></div>
+  
+  <!-- Bttons for chords  -->
+  <!-- =============================================================================== -->
+  <div class = "container">
+  
+  <button id ="buttonToTurnChordsToKey" class="btn btn-outline-primary btn-lg">Find Scale</button>
+  <div class = "chordbuttons" >
+    <h5 style = "color:white;">Individual Notes: </h5>
+    <!-- Buttons with notes to click to see what key they are in  -->
+    <div  id="notePicker" style="width:50%; text-align:center">
+        <button type="button" class="btn btn-outline-primary" id = "A">A</button>
+        <button type="button" class="btn btn-outline-primary" id = "Asharp">A#</button>
+        <button type="button" class="btn btn-outline-primary" id = "B">B</button>
+        <button type="button" class="btn btn-outline-primary" id = "C">C</button>
+        <button type="button" class="btn btn-outline-primary" id = "Csharp">C#</button>
+        <button type="button" class="btn btn-outline-primary" id = "D">D</button>
+        <button type="button" class="btn btn-outline-primary" id = "Dsharp">D#</button>
+        <button type="button" class="btn btn-outline-primary" id = "E">E</button>
+        <button type="button" class="btn btn-outline-primary" id = "F">F</button>
+        <button type="button" class="btn btn-outline-primary" id = "Fsharp">F#</button>
+        <button type="button" class="btn btn-outline-primary" id = "G">G</button>
+        <button type="button" class="btn btn-outline-primary" id = "Gsharp">G#</button>
+      
+        <!-- <button id ="buttonToFindScale" class="btn btn-outline-primary btn-lg">Find Scale</button> -->
+    </div>
+  <p class = "space"></p>
+  <h5 style = "color:white;">Chords: </h5>
+  <div class="row">
+    <div class="col-sm">
+      <p class = "scales">Major</p>>
+      <div class="list-group" id ="MajorChords">
+        <button type="button" class="btn btn-outline-primary" id = "AMajorChord">A</button>
+        <button type="button" class="btn btn-outline-primary" id = "ASharpMajorChord">A#</button>
+        <button type="button" class="btn btn-outline-primary" id = "BMajorChord">B</button>
+        <button type="button" class="btn btn-outline-primary"id = "CMajorChord">C</button>
+        <button type="button" class="btn btn-outline-primary" id ="CSharpMajorChord">C#</button>
+        <button type="button" class="btn btn-outline-primary" id = "DMajorChord">D</button>
+        <button type="button" class="btn btn-outline-primary" id = "DSharpMajorChord">D#</button>
+        <button type="button" class="btn btn-outline-primary" id = "EMajorChord">E</button>
+        <button type="button" class="btn btn-outline-primary"id = "FMajorChord">F</button>
+        <button type="button" class="btn btn-outline-primary" id ="FSharpMajorChord">F#</button>
+        <button type="button" class="btn btn-outline-primary"id = "GMajorChord">G</button>
+        <button type="button" class="btn btn-outline-primary" id ="GSharpMajorChord">G#</button>
+      </div>
+    </div>
+  
+    <!-- Minor Chords -->
+    <div class="col-sm">
+      <p class = "scales">Minor</p>>
+      <div class="list-group" id ="MinorChords">
+        <button type="button" class="btn btn-outline-primary" id = "AMinorChord">Am</button>
+        <button type="button" class="btn btn-outline-primary" id = "ASharpMinorChord">A#m</button>
+        <button type="button" class="btn btn-outline-primary" id = "BMinorChord">Bm</button>
+        <button type="button" class="btn btn-outline-primary"id = "CMinorChord">Cm</button>
+        <button type="button" class="btn btn-outline-primary" id ="CSharpMinorChord">C#m</button>
+        <button type="button" class="btn btn-outline-primary" id = "DMinorChord">Dm</button>
+        <button type="button" class="btn btn-outline-primary" id = "DSharpMinorChord">D#m</button>
+        <button type="button" class="btn btn-outline-primary" id = "EMinorChord">Em</button>
+        <button type="button" class="btn btn-outline-primary"id = "FMinorChord">Fm</button>
+        <button type="button" class="btn btn-outline-primary" id ="FSharpMinorChord">F#m</button>
+        <button type="button" class="btn btn-outline-primary"id = "GMinorChord">Gm</button>
+        <button type="button" class="btn btn-outline-primary" id ="GSharpMinorChord">G#m</button>
+      </div>
+    </div>
+  
+    <!-- 7th Chords -->
+    <div class="col-sm">
+      <p class = "scales">7th</p>>
+      <div class="list-group" id ="7Chords">
+        <button type="button" class="btn btn-outline-primary" id = "A7Chord">A7</button>
+        <button type="button" class="btn btn-outline-primary" id = "ASharp7Chord">A#7</button>
+        <button type="button" class="btn btn-outline-primary" id = "B7Chord">B7</button>
+        <button type="button" class="btn btn-outline-primary"id = "C7Chord">C7</button>
+        <button type="button" class="btn btn-outline-primary" id ="CSharp7Chord">C#7</button>
+        <button type="button" class="btn btn-outline-primary" id = "D7Chord">D7</button>
+        <button type="button" class="btn btn-outline-primary" id = "DSharp7Chord">D#7</button>
+        <button type="button" class="btn btn-outline-primary" id = "E7Chord">E7</button>
+        <button type="button" class="btn btn-outline-primary"id = "F7Chord">F7</button>
+        <button type="button" class="btn btn-outline-primary" id ="FSharp7Chord">F#7</button>
+        <button type="button" class="btn btn-outline-primary"id = "G7Chord">G7</button>
+        <button type="button" class="btn btn-outline-primary" id ="GSharp7Chord">G#7</button>
+      </div>
+    </div>
+  
+    <!-- Major 7th -->
+    <div class="col-sm">
+      <p class = "scales">Maj7</p>>
+      <div class="list-group" id ="Major7Chords">
+        <button type="button" class="btn btn-outline-primary" id = "AMajor7Chord">Amaj7</button>
+        <button type="button" class="btn btn-outline-primary" id = "ASharpMajor7Chord">A#maj7</button>
+        <button type="button" class="btn btn-outline-primary" id = "BMajor7Chord">Bmaj7</button>
+        <button type="button" class="btn btn-outline-primary"id = "CMajor7Chord">Cmaj7</button>
+        <button type="button" class="btn btn-outline-primary" id ="CSharpMajor7Chord">C#maj7</button>
+        <button type="button" class="btn btn-outline-primary" id = "DMajor7Chord">Dmaj7</button>
+        <button type="button" class="btn btn-outline-primary" id = "DSharpMajor7Chord">D#maj7</button>
+        <button type="button" class="btn btn-outline-primary" id = "EMajor7Chord">Emaj7</button>
+        <button type="button" class="btn btn-outline-primary"id = "FMajor7Chord">Fmaj7</button>
+        <button type="button" class="btn btn-outline-primary" id ="FSharpMajor7Chord">F#maj7</button>
+        <button type="button" class="btn btn-outline-primary"id = "GMajor7Chord">Gmaj7</button>
+        <button type="button" class="btn btn-outline-primary" id ="GSharpMajor7Chord">G#maj7</button>
+      </div>
+    </div>
+    
+    <!-- Minor 7th -->
+    <div class="col-sm">
+      <p class = "scales">Minor 7</p>>
+      <div class="list-group" id ="Minor7Chords">
+        <button type="button" class="btn btn-outline-primary" id = "AMinor7Chord">Am7</button>
+        <button type="button" class="btn btn-outline-primary" id = "ASharpMinor7Chord">A#m7</button>
+        <button type="button" class="btn btn-outline-primary" id = "BMinor7Chord">Bm7</button>
+        <button type="button" class="btn btn-outline-primary"id = "CMinor7Chord">Cm7</button>
+        <button type="button" class="btn btn-outline-primary" id ="CSharpMinor7Chord">C#m7</button>
+        <button type="button" class="btn btn-outline-primary" id = "DMinor7Chord">Dm7</button>
+        <button type="button" class="btn btn-outline-primary" id = "DSharpMinor7Chord">D#m7</button>
+        <button type="button" class="btn btn-outline-primary" id = "EMinor7Chord">Em7</button>
+        <button type="button" class="btn btn-outline-primary"id = "FMinor7Chord">Fm7</button>
+        <button type="button" class="btn btn-outline-primary" id ="FSharpMinor7Chord">F#m7</button>
+        <button type="button" class="btn btn-outline-primary"id = "GMinor7Chord">Gm7</button>
+        <button type="button" class="btn btn-outline-primary" id ="GSharpMinor7Chord">G#m7</button>
+      </div>
+    </div>
+  
+    <!-- MinorMajor7 -->
+    <div class="col-sm">
+      <p class = "scales">Minor Major 7</p>>
+      <div class="list-group" id ="MinorMajor7Chords">
+        <button type="button" class="btn btn-outline-primary" id = "AMinorMajor7Chord">AmM7</button>
+        <button type="button" class="btn btn-outline-primary" id = "ASharpMinorMajor7Chord">AmM7</button>
+        <button type="button" class="btn btn-outline-primary" id = "BMinorMajor7Chord">BmM7</button>
+        <button type="button" class="btn btn-outline-primary"id = "CMinorMajor7Chord">CmM7</button>
+        <button type="button" class="btn btn-outline-primary" id ="CSharpMinorMajor7Chord">C#mM7</button>
+        <button type="button" class="btn btn-outline-primary" id = "DMinorMajor7Chord">DmM7</button>
+        <button type="button" class="btn btn-outline-primary" id = "DSharpMinorMajor7Chord">D#mM7</button>
+        <button type="button" class="btn btn-outline-primary" id = "EMinorMajor7Chord">EmM7</button>
+        <button type="button" class="btn btn-outline-primary"id = "FMinorMajor7Chord">FmM7</button>
+        <button type="button" class="btn btn-outline-primary" id ="FSharpMinorMajor7Chord">F#mM7</button>
+        <button type="button" class="btn btn-outline-primary"id = "GMinorMajor7Chord">GmM7</button>
+        <button type="button" class="btn btn-outline-primary" id ="GSharpMinorMajor7Chord">G#mM7</button>
+      </div>
+    </div>
+    
+  </div>
+  
+  </div>
+  </div>
+  <!-- ============================================================================================================== -->
+  
+  
+  <h2>Choose Key and Scale Type to View Notes In Scale</h2>
+   
+        <div class="btn-group" data-toggle="buttons" id = "choosenoteforscale">
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Anote" checked> A
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Asharpnote"> A#
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Bnote"> B
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="radionotebutton" id="Cnote"> C
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Csharpnote"> C#
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Dnote"> D
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Dsharpnote"> D#
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Enote"> E
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Fnote"> F
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="radionotebutton" id="Fsharpnote"> F#
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Gnote"> G
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="radionotebutton" id="Gsharpnote"> G#
+            </label>
+      </div>
+      <p></p>
+      <div class="btn-group" data-toggle="buttons" id = "choosescaleforscale">
+          <label class="btn btn-primary">
+            <input type="radio" name="radioscalebutton" id="major" checked> Major
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" name="radioscalebutton" id="minor"> Minor
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" name="radioscalebutton" id="major_p"> Major Pentatonic
+          </label>
+          <label class="btn btn-primary">
+              <input type="radio" name="radioscalebutton" id="minor_p"> Minor Pentatonic
+          </label>
+      </div>
+       
+  
+      <button id = "shownotesinscale" class="btn btn-outline-primary btn-lg">View Notes in Scale</button>
+  
+  <!-- Display notes chosen to screen here -->
+  
+  <div id = "notePrinter"></div>
+  <ul class="list-inline">
+      <li class="list-inline-item" id="noteInList">A</li>
+      <li class="list-inline-item" id="noteInList">A#</li>
+      <li class="list-inline-item" id="noteInList">B</li>
+      <li class="list-inline-item" id="noteInList">C</li>
+      <li class="list-inline-item" id="noteInList">C#</li>
+      <li class="list-inline-item" id="noteInList">D</li>
+      <li class="list-inline-item" id="noteInList">D#</li>
+      <li class="list-inline-item" id="noteInList">E</li>
+      <li class="list-inline-item" id="noteInList">F</li>
+      <li class="list-inline-item" id="noteInList">F#</li>
+      <li class="list-inline-item" id="noteInList">G</li>
+      <li class="list-inline-item" id="noteInList">G#</li>
+    </ul>
+   
+  <p></p>
+</ion-content>
