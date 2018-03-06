@@ -1,0 +1,8 @@
+{
+  "name": "ScaleFinder",
+  "app_id": "b15a96ee",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
