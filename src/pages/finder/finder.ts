@@ -93,7 +93,6 @@ let g_sharp_major_scale = make_major("G#",notes);
 let a_minor_scale = make_minor("A",notes);
 let a_sharp_minor_scale = make_minor("A#",notes);
 let b_minor_scale = make_minor("B",notes);
-let b_sharp_minor_scale = make_minor("B#",notes);
 let c_minor_scale = make_minor("C",notes);
 let c_sharp_minor_scale = make_minor("C#",notes);
 let d_minor_scale = make_minor("D",notes);

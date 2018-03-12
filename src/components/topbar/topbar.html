@@ -1,0 +1,23 @@
+<ion-toolbar>
+    <ion-title>
+      Music
+    </ion-title>
+        <ion-segment>
+            
+            <button ion-button clear large (click) = "goToHomePage()">
+              Home
+            </button>
+            <button ion-button clear large (click)="presentPopover($event)">
+              Scales
+            </button>
+            <button ion-button clear large (click) = "goToFinderPage()">
+              Scale Finder
+            </button>
+          </ion-segment>
+        
+    <ion-buttons end>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="ios-menu-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
