@@ -1,0 +1,17 @@
+image-section {
+    /*============ Testimonials ==================*/
+    .testimonial {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(12, 11, 11, 0.904)), url('../../assets/imgs/header-bg.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        -webkit-background-size: cover;
+        background-position: 50% 50%;
+    }
+    .testimonial-overlay {
+        padding-top: 180px;
+        padding-bottom: 180px;
+    }
+}

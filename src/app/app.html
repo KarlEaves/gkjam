@@ -1,27 +1,32 @@
-<ion-menu [content]  ="content">
+<ion-menu [content]="content">
     <ion-header no-border>
         <ion-toolbar>
-            <ion-title>Admin Dashboard></ion-title>
-            <button></button>
+            <ion-title>GKJAM</ion-title>
         </ion-toolbar>
     </ion-header>
-    
-
+    <ion-content padding>
 
 
         <ion-list>
-            <button ion-item (click) = "openHomePage()" menuClose>
-                <p>Home</p>
+            <button ion-item (click)="openHomePage()" menuClose>
+                 <p> Home</p>
+                </button>
+            <button ion-item (click)="openFinderPage()" menuClose>
+                    <p> Finder Page</p>
             </button>
-            <button ion-item (click) = "openScalesPage()" menuClose>
-                <p>Scales</p>
+            <button ion-item (click)="openScalesPage()" menuClose>
+                <p> Scales Page</p>
             </button>
-            <button ion-item (click) = "openFinderPage()" menuClose>
-                <p>Scale Finder</p>
+            <button ion-item (click)="openTunerPage()" menuClose>
+                <p> Tuner Page</p>
             </button>
+
+
         </ion-list>
-        
 
-
+    </ion-content>
 </ion-menu>
-<ion-nav #content swipeBackEnabled="false" [root]="rootPage"></ion-nav>
+
+
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

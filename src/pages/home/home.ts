@@ -20,6 +20,7 @@ export class HomePage {
   
   ionViewDidEnter(){
   }
+  
   goToTunerPage()
   {
     this.navCtrl.push(TunerPage);
