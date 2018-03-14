@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+//This... 
+import { MediaPlugin } from 'ionic-native';
 
 /**
  * Generated class for the TunerPage page.
@@ -16,8 +18,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 export class TunerPage {
 
+  public startRecording(){
+    try {
+      let media = new MediaPlugin('../Library/NoCloud/recording.wav');
+      media.startRecord();
+    }
+    catch (e) {
+      this.showAlert('Could not start recording.');
+    }
+    
+  }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  showAlert(message) {
+    let alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
 
   }
 

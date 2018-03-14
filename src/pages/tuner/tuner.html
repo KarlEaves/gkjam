@@ -6,40 +6,43 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>tuner</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>tuner</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 <ion-content>
-<html>
-<head>
+    <html>
 
-</head>
+    <head>
 
-<body>
-<p>It sounds like you're playing...</p>
-<h1 id="note-name"></h1>
-<p>
-	<span>frequency (Hz):</span>
-	<span id="frequency"></span>
-</p>
-<hr>
+    </head>
 
-<button id = "start_recording" ion-button>Start Recording</button>
-<button id = "stop_recording" ion-button color="secondary">Stop Recording</button>
+    <body>
+        <p>It sounds like you're playing...</p>
+        <h1 id="note-name"></h1>
+        <p>
+            <span>frequency (Hz):</span>
+            <span id="frequency"></span>
+        </p>
+        <hr>
 
-<button id = "reset_recording" ion-button color="dark">Restart</button>
-<button id="play-note" >start/stop an E note</button>
+        <button id="start_recording" ion-button (click)="startRecording()">Start Recording 2</button>
 
-<div id = "scalePrinter"></div>
-<hr>
-<a href="https://github.com/jbergknoff/guitar-tuner">Source code</a> / <a href="http://jonathan.bergknoff.com/journal/making-a-guitar-tuner-html5">Explanatory article</a>
-</body>
-</html>
+        <button id="start_recording" ion-button>Start Recording</button>
+        <button id="stop_recording" ion-button color="secondary">Stop Recording</button>
+
+        <button id="reset_recording" ion-button color="dark">Restart</button>
+        <button id="play-note">start/stop an E note</button>
+
+        <div id="scalePrinter"></div>
+        <hr>
+        <a href="https://github.com/jbergknoff/guitar-tuner">Source code</a> / <a href="http://jonathan.bergknoff.com/journal/making-a-guitar-tuner-html5">Explanatory article</a>
+    </body>
+
+    </html>
 </ion-content>
 
 <script>
- 
-  </script>
+</script>
