@@ -1,46 +1,50 @@
-<ion-header>
-  
-  <topbar></topbar>
-  
-        
+<ion-header no-border>
+    <ion-toolbar>
+        <ion-title>Home</ion-title>
+
+
+        <ion-buttons start class="toolbar-button">
+            <button ion-button icon-only menuToggle color="dark" clear>Home</button>
+        </ion-buttons>
+
+        <ion-buttons start class="toolbar-button">
+            <button ion-button icon-only menuToggle color="dark" clear>Features</button>
+        </ion-buttons>
+
+        <ion-buttons start class="toolbar-button">
+            <button ion-button icon-only menuToggle color="dark" clear>Finder</button>
+        </ion-buttons>
+
+        <ion-buttons start class="toolbar-button">
+            <button ion-button icon-only menuToggle color="dark" clear>Scales</button>
+        </ion-buttons>
+
+        <ion-buttons start class="toolbar-button">
+            <button ion-button icon-only menuToggle color="dark" clear>Tuner</button>
+        </ion-buttons>
+
+        <ion-buttons start class="toolbar-toggle-button">
+            <button ion-button icon-only menuToggle>
+              <ion-icon name="ios-menu-outline" ></ion-icon>
+          </button>
+        </ion-buttons>
+
+
+
+
+    </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content>
+    <!-- <div class="containaer-fluid"> -->
 
-   
-
-  <ion-buttons start (click) = "goToTunerPage()">
-      <button ion-button>
-        <ion-icon name="ios-key"></ion-icon>
-      </button>
-  </ion-buttons>
-
-  
-
-  <ion-buttons start (click) = "goToScalesPage('major')">
-    <button ion-button>
-      Major Scale
-    </button>
-  </ion-buttons>
-
-  <ion-buttons start (click) = "goToScalesPage('minor')">
-    <button ion-button>
-      Minor Scale
-    </button>
-  
-  </ion-buttons>
-
-  <ion-buttons start (click) = "goToScalesPage('majpentatonic')">
-    <button ion-button>
-      Major Pentatonic
-    </button>
-
-  </ion-buttons>
-
-  <ion-buttons start (click) = "goToScalesPage('minpentatonic')">
-    <button ion-button>
-      Minor Pentatonic
-    </button>
-  </ion-buttons>
-    
+    <header-overlay></header-overlay>
+    <about></about>
+    <image-section></image-section>
+    <features></features>
+    <image-section></image-section>
+    <contact-us></contact-us>
+    <!-- </div> -->
 </ion-content>

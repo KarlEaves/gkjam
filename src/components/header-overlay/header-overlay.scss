@@ -1,0 +1,16 @@
+header-overlay {
+    /*================header overlay====================== */
+    .header-overlay-container {
+        /* background-color: rgba(31, 31, 31, 0.75); */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(3, 0, 0, 0.904)), url('../../assets/imgs/header-bg.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        -webkit-background-size: cover;
+        height: 100%;
+        margin: 0%;
+    }
+}

@@ -1,3 +1,9 @@
+import { ScaleDescriptionPage } from './../pages/scale-description/scale-description';
+import { ContactUsComponent } from './../components/contact-us/contact-us';
+import { ImageSectionComponent } from './../components/image-section/image-section';
+import { FeaturesComponent } from './../components/features/features';
+import { AboutComponent } from './../components/about/about';
+import { HeaderOverlayComponent } from './../components/header-overlay/header-overlay';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -27,7 +33,13 @@ import { TunerPage } from '../pages/tuner/tuner';
     PopoverPage,
     PentatonicPopoverPage,
     JazzPopoverPage,
-    TunerPage
+    TunerPage,
+    HeaderOverlayComponent,
+    AboutComponent,
+    FeaturesComponent,
+    ImageSectionComponent,
+    ContactUsComponent,
+    ScaleDescriptionPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +56,13 @@ import { TunerPage } from '../pages/tuner/tuner';
     PopoverPage,
     PentatonicPopoverPage,
     JazzPopoverPage,
-    TunerPage
+    TunerPage,
+    HeaderOverlayComponent,
+    AboutComponent,
+    FeaturesComponent,
+    ImageSectionComponent,
+    ContactUsComponent,
+    ScaleDescriptionPage
   ],
   providers: [
     StatusBar,
