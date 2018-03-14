@@ -1,3 +1,4 @@
+import { ScaleDescriptionPage } from './../scale-description/scale-description';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -18,6 +19,12 @@ export class ScalesPage {
   notes:string[] = ['A','A#','B','C','C#','D','D#','E','F','F#','G','G#'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
+
+  openScaleDescriptionPage(){
+    this.navCtrl.push(ScaleDescriptionPage)
+  }
+
+
   ionViewDidLoad() {
     this.test = this.navParams.get('test');
     if (this.test =="major")
@@ -536,6 +543,8 @@ export class ScalesPage {
     return return_scale;
     
   }
+
+  
 }
 
 

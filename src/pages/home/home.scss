@@ -1,22 +1,21 @@
 page-home {
-  
-        .container-fluid{
-            @media screen and (min-width: 0px) and (max-width:575px) {
-            background-color: black;
-            .column1{
-                visibility: hidden;
-                background-color: rgb(102, 78, 78);
-
-            }
-            }
-
-            @media screen and (min-width: 575px) and (max-width:970px) {
-                background-color: rgb(165, 15, 15);
-            }
-
-            @media screen and (min-width: 970px) {
-                background-color: rgb(31, 16, 56);
-            }
+    @media screen and (min-width: 0px) and (max-width: 575px) {
+        background-color: black;
+        .toolbar-button {
+            visibility: hidden;
         }
-
+    }
+    @media screen and (min-width: 575px) and (max-width:970px) {
+        .toolbar-button {
+            visibility: hidden;
+        }
+    }
+    @media screen and (min-width: 970px) {
+        .toolbar-button {
+            visibility: visible;
+        }
+        .toolbar-toggle-button {
+            visibility: hidden;
+        }
+    }
 }

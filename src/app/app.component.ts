@@ -1,3 +1,4 @@
+import { TunerPage } from './../pages/tuner/tuner';
 import { Component } from '@angular/core';
 import { Platform,App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -38,6 +39,10 @@ export class MyApp {
   openScalesPage()
   {
     this.navCtrl.push(ScalesPage);
+  }
+
+  openTunerPage(){
+    this.navCtrl.push(TunerPage)
   }
   
 }
