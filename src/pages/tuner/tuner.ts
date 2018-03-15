@@ -1,7 +1,10 @@
+import { Scales } from './../../assets/music-classes/Scales';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 //This... 
 import { MediaPlugin } from 'ionic-native';
+
+import {HttpModule}
 
 /**
  * Generated class for the TunerPage page.
@@ -18,7 +21,18 @@ import { MediaPlugin } from 'ionic-native';
 
 export class TunerPage {
 
-  public startRecording(){
+  
+
+
+
+
+  constructor( public scales: Scales, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public plt: Platform) {
+
+  }
+
+  public startApplicationRecording() {
+
+    console.log("new record button");
     try {
       let media = new MediaPlugin('../Library/NoCloud/recording.wav');
       media.startRecord();
@@ -26,7 +40,23 @@ export class TunerPage {
     catch (e) {
       this.showAlert('Could not start recording.');
     }
-    
+
+  }
+
+  public startWebRecording(){
+      console.log("desktop");
+  }
+
+  //start recording is called when the button is clicked. it checks which device the user is on, and does code based on that
+  public startRecording(){
+    if ((this.plt.is('ios')) || (this.plt.is('android')))
+    {
+      this.startApplicationRecording();
+    }
+    if (this.plt.is('core'))
+    {
+      this.startWebRecording();
+    }
   }
 
   showAlert(message) {
@@ -38,14 +68,9 @@ export class TunerPage {
     alert.present();
   }
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
-
-  }
-
   ionViewDidLoad() {
 
-    make_scales();
+    this.scales.make_scales();
     var C2 = 65.41; // C2 note, in Hz.
 
     var notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -92,7 +117,13 @@ export class TunerPage {
     }
 
     function use_stream(stream) {
+      var AudioContext = (<any>window).AudioContext // Default
+      || (<any>window).webkitAudioContext // Safari and old versions of Chrome
+      || false;      
+      
+      
       var audio_context = new AudioContext();
+
       var microphone = audio_context.createMediaStreamSource(stream);
       (<any>window).source = microphone; // Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=934512
       console.log("set mic");
@@ -199,274 +230,11 @@ export class TunerPage {
     document.getElementById("reset_recording").addEventListener("click", reset_recorded_notes);
 
   }
-
-
-
-
-
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
 var recording = false;
 
-var major_scales = [];
-
-var minor_scales = [];
-
-var major_pentatonic_scales = [];
-
-var minor_pentatonic_scales = [];
-
-var minor_melodic_scales = [];
-
-var minor_harmonic_scales = [];
-
-var minor_blues_scales = [];
-
-var major_blues_scales = [];
-
-var major_bebop_scales = [];
-
-var minor_bebop_scales = [];
-
-let ionian_scales = [];
-
-let dorian_scales = [];
-
-let phrygian_scales = [];
-
-let lydian_scales = [];
-
-let mixolydian_scales = [];
-
-let aeolian_scales = [];
-
-let locrian_scales = [];
-
-var music_notes: string[] = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
-//declare major scales
-let a_major_scale = make_major("A", music_notes);
-let a_sharp_major_scale = make_major("A#", music_notes);
-let b_major_scale = make_major("B", music_notes);
-let c_major_scale = make_major("C", music_notes);
-let c_sharp_major_scale = make_major("C#", music_notes);
-let d_major_scale = make_major("D", music_notes);
-let d_sharp_major_scale = make_major("D#", music_notes);
-let e_major_scale = make_major("E", music_notes);
-let f_major_scale = make_major("F", music_notes);
-let f_sharp_major_scale = make_major("F#", music_notes);
-let g_major_scale = make_major("G", music_notes);
-let g_sharp_major_scale = make_major("G#", music_notes);
-
-//declare minor scales
-let a_minor_scale = make_minor("A", music_notes);
-let a_sharp_minor_scale = make_minor("A#", music_notes);
-let b_minor_scale = make_minor("B", music_notes);
-let c_minor_scale = make_minor("C", music_notes);
-let c_sharp_minor_scale = make_minor("C#", music_notes);
-let d_minor_scale = make_minor("D", music_notes);
-let d_sharp_minor_scale = make_minor("D#", music_notes);
-let e_minor_scale = make_minor("E", music_notes);
-let f_minor_scale = make_minor("F", music_notes);
-let f_sharp_minor_scale = make_minor("F#", music_notes);
-let g_minor_scale = make_minor("G", music_notes);
-let g_sharp_minor_scale = make_minor("G#", music_notes);
-
-//declare major pentatonic scales
-let a_major_p_scale = make_pentatonic_major("A", music_notes);
-let a_sharp_major_p_scale = make_pentatonic_major("A#", music_notes);
-let b_major_p_scale = make_pentatonic_major("B", music_notes);
-let c_major_p_scale = make_pentatonic_major("C", music_notes);
-let c_sharp_major_p_scale = make_pentatonic_major("C#", music_notes);
-let d_major_p_scale = make_pentatonic_major("D", music_notes);
-let d_sharp_major_p_scale = make_pentatonic_major("D#", music_notes);
-let e_major_p_scale = make_pentatonic_major("E", music_notes);
-let f_major_p_scale = make_pentatonic_major("F", music_notes);
-let f_sharp_major_p_scale = make_pentatonic_major("F#", music_notes);
-let g_major_p_scale = make_pentatonic_major("G", music_notes);
-let g_sharp_major_p_scale = make_pentatonic_major("G#", music_notes);
-
-//declare minor pentatonic scales
-let a_minor_p_scale = make_pentatonic_minor("A", music_notes);
-let a_sharp_minor_p_scale = make_pentatonic_minor("A#", music_notes);
-let b_minor_p_scale = make_pentatonic_minor("B", music_notes);
-let c_minor_p_scale = make_pentatonic_minor("C", music_notes);
-let c_sharp_minor_p_scale = make_pentatonic_minor("C#", music_notes);
-let d_minor_p_scale = make_pentatonic_minor("D", music_notes);
-let d_sharp_minor_p_scale = make_pentatonic_minor("D#", music_notes);
-let e_minor_p_scale = make_pentatonic_minor("E", music_notes);
-let f_minor_p_scale = make_pentatonic_minor("F", music_notes);
-let f_sharp_minor_p_scale = make_pentatonic_minor("F#", music_notes);
-let g_minor_p_scale = make_pentatonic_minor("G", music_notes);
-let g_sharp_minor_p_scale = make_pentatonic_minor("G#", music_notes);
-
-//declare melodic minor scales
-let a_minor_melodic_scale = make_melodic_minor("A", music_notes);
-let a_sharp_minor_melodic_scale = make_melodic_minor("A#", music_notes);
-let b_minor_melodic_scale = make_melodic_minor("B", music_notes);
-let c_minor_melodic_scale = make_melodic_minor("C", music_notes);
-let c_sharp_minor_melodic_scale = make_melodic_minor("C#", music_notes);
-let d_minor_melodic_scale = make_melodic_minor("D", music_notes);
-let d_sharp_minor_melodic_scale = make_melodic_minor("D#", music_notes);
-let e_minor_melodic_scale = make_melodic_minor("E", music_notes);
-let f_minor_melodic_scale = make_melodic_minor("F", music_notes);
-let f_sharp_minor_melodic_scale = make_melodic_minor("F#", music_notes);
-let g_minor_melodic_scale = make_melodic_minor("G", music_notes);
-let g_sharp_minor_melodic_scale = make_melodic_minor("G#", music_notes);
-
-//declare harmonic minor scales
-let a_minor_harmonic_scale = make_harmonic_minor("A", music_notes);
-let a_sharp_minor_harmonic_scale = make_harmonic_minor("A#", music_notes);
-let b_minor_harmonic_scale = make_harmonic_minor("B", music_notes);
-let c_minor_harmonic_scale = make_harmonic_minor("C", music_notes);
-let c_sharp_minor_harmonic_scale = make_harmonic_minor("C#", music_notes);
-let d_minor_harmonic_scale = make_harmonic_minor("D", music_notes);
-let d_sharp_minor_harmonic_scale = make_harmonic_minor("D#", music_notes);
-let e_minor_harmonic_scale = make_harmonic_minor("E", music_notes);
-let f_minor_harmonic_scale = make_harmonic_minor("F", music_notes);
-let f_sharp_minor_harmonic_scale = make_harmonic_minor("F#", music_notes);
-let g_minor_harmonic_scale = make_harmonic_minor("G", music_notes);
-let g_sharp_minor_harmonic_scale = make_harmonic_minor("G#", music_notes);
-
-//declare  minor blues scales
-let a_minor_blues_scale = make_minor_blues("A", music_notes);
-let a_sharp_minor_blues_scale = make_minor_blues("A#", music_notes);
-let b_minor_blues_scale = make_minor_blues("B", music_notes);
-let c_minor_blues_scale = make_minor_blues("C", music_notes);
-let c_sharp_minor_blues_scale = make_minor_blues("C#", music_notes);
-let d_minor_blues_scale = make_minor_blues("D", music_notes);
-let d_sharp_minor_blues_scale = make_minor_blues("D#", music_notes);
-let e_minor_blues_scale = make_minor_blues("E", music_notes);
-let f_minor_blues_scale = make_minor_blues("F", music_notes);
-let f_sharp_minor_blues_scale = make_minor_blues("F#", music_notes);
-let g_minor_blues_scale = make_minor_blues("G", music_notes);
-let g_sharp_minor_blues_scale = make_minor_blues("G#", music_notes);
-
-//declare  major blues scales
-let a_major_blues_scale = f_sharp_minor_blues_scale;
-let a_sharp_major_blues_scale = g_minor_blues_scale;
-let b_major_blues_scale = g_sharp_minor_blues_scale;
-let c_major_blues_scale = a_minor_blues_scale;
-let c_sharp_major_blues_scale = a_sharp_minor_blues_scale;
-let d_major_blues_scale = b_minor_blues_scale;
-let d_sharp_major_blues_scale = c_minor_blues_scale;
-let e_major_blues_scale = c_sharp_minor_blues_scale;
-let f_major_blues_scale = d_minor_blues_scale;
-let f_sharp_major_blues_scale = d_sharp_minor_blues_scale;
-let g_major_blues_scale = e_minor_blues_scale;
-let g_sharp_major_blues_scale = f_minor_blues_scale;
-
-//declare  minor bebop scales
-let a_minor_bebop_scale = make_bebop_minor("A", music_notes);
-let a_sharp_minor_bebop_scale = make_bebop_minor("A#", music_notes);
-let b_minor_bebop_scale = make_bebop_minor("B", music_notes);
-let c_minor_bebop_scale = make_bebop_minor("C", music_notes);
-let c_sharp_minor_bebop_scale = make_bebop_minor("C#", music_notes);
-let d_minor_bebop_scale = make_bebop_minor("D", music_notes);
-let d_sharp_minor_bebop_scale = make_bebop_minor("D#", music_notes);
-let e_minor_bebop_scale = make_bebop_minor("E", music_notes);
-let f_minor_bebop_scale = make_bebop_minor("F", music_notes);
-let f_sharp_minor_bebop_scale = make_bebop_minor("F#", music_notes);
-let g_minor_bebop_scale = make_bebop_minor("G", music_notes);
-let g_sharp_minor_bebop_scale = make_bebop_minor("G#", music_notes);
-
-//declare major bebop scales
-let a_major_bebop_scale = make_bebop_major("A", music_notes);
-let a_sharp_major_bebop_scale = make_bebop_major("A#", music_notes);
-let b_major_bebop_scale = make_bebop_major("B", music_notes);
-let c_major_bebop_scale = make_bebop_major("C", music_notes);
-let c_sharp_major_bebop_scale = make_bebop_major("C#", music_notes);
-let d_major_bebop_scale = make_bebop_major("D", music_notes);
-let d_sharp_major_bebop_scale = make_bebop_major("D#", music_notes);
-let e_major_bebop_scale = make_bebop_major("E", music_notes);
-let f_major_bebop_scale = make_bebop_major("F", music_notes);
-let f_sharp_major_bebop_scale = make_bebop_major("F#", music_notes);
-let g_major_bebop_scale = make_bebop_major("G", music_notes);
-let g_sharp_major_bebop_scale = make_bebop_major("G#", music_notes);
-
-//declare dorian scales
-let a_dorian_scale = make_major("G", music_notes);
-let a_sharp_dorian_scale = make_major("G#", music_notes);
-let b_dorian_scale = make_major("A", music_notes);
-let c_dorian_scale = make_major("A#", music_notes);
-let c_sharp_dorian_scale = make_major("B", music_notes);
-let d_dorian_scale = make_major("C", music_notes);
-let d_sharp_dorian_scale = make_major("C#", music_notes);
-let e_dorian_scale = make_major("D", music_notes);
-let f_dorian_scale = make_major("D#", music_notes);
-let f_sharp_dorian_scale = make_major("E", music_notes);
-let g_dorian_scale = make_major("F", music_notes);
-let g_sharp_dorian_scale = make_major("F#", music_notes);
-
-//declare phrygian scales
-let a_phrygian_scale = make_major("F", music_notes);
-let a_sharp_phrygian_scale = make_major("F#", music_notes);
-let b_phrygian_scale = make_major("G", music_notes);
-let c_phrygian_scale = make_major("G#", music_notes);
-let c_sharp_phrygian_scale = make_major("A", music_notes);
-let d_phrygian_scale = make_major("A#", music_notes);
-let d_sharp_phrygian_scale = make_major("B", music_notes);
-let e_phrygian_scale = make_major("C", music_notes);
-let f_phrygian_scale = make_major("C#", music_notes);
-let f_sharp_phrygian_scale = make_major("D", music_notes);
-let g_phrygian_scale = make_major("D#", music_notes);
-let g_sharp_phrygian_scale = make_major("E", music_notes);
-
-//declare lydian scales
-let a_lydian_scale = make_major("E", music_notes);
-let a_sharp_lydian_scale = make_major("F", music_notes);
-let b_lydian_scale = make_major("F#", music_notes);
-let c_lydian_scale = make_major("G", music_notes);
-let c_sharp_lydian_scale = make_major("G#", music_notes);
-let d_lydian_scale = make_major("A", music_notes);
-let d_sharp_lydian_scale = make_major("A#", music_notes);
-let e_lydian_scale = make_major("B", music_notes);
-let f_lydian_scale = make_major("C", music_notes);
-let f_sharp_lydian_scale = make_major("C#", music_notes);
-let g_lydian_scale = make_major("D", music_notes);
-let g_sharp_lydian_scale = make_major("D#", music_notes);
-
-//declare mixolydian scales
-let a_mixolydian_scale = make_major("D", music_notes);
-let a_sharp_mixolydian_scale = make_major("D#", music_notes);
-let b_mixolydian_scale = make_major("E", music_notes);
-let c_mixolydian_scale = make_major("F", music_notes);
-let c_sharp_mixolydian_scale = make_major("F#", music_notes);
-let d_mixolydian_scale = make_major("G", music_notes);
-let d_sharp_mixolydian_scale = make_major("G#", music_notes);
-let e_mixolydian_scale = make_major("A", music_notes);
-let f_mixolydian_scale = make_major("A#", music_notes);
-let f_sharp_mixolydian_scale = make_major("B", music_notes);
-let g_mixolydian_scale = make_major("C", music_notes);
-let g_sharp_mixolydian_scale = make_major("C#", music_notes);
-
-//declare aeolian scales
-let a_aeolian_scale = make_minor("A", music_notes);
-let a_sharp_aeolian_scale = make_minor("A#", music_notes);
-let b_aeolian_scale = make_minor("B", music_notes);
-let c_aeolian_scale = make_minor("C", music_notes);
-let c_sharp_aeolian_scale = make_minor("C#", music_notes);
-let d_aeolian_scale = make_minor("D", music_notes);
-let d_sharp_aeolian_scale = make_minor("D#", music_notes);
-let e_aeolian_scale = make_minor("E", music_notes);
-let f_aeolian_scale = make_minor("F", music_notes);
-let f_sharp_aeolian_scale = make_minor("F#", music_notes);
-let g_aeolian_scale = make_minor("G", music_notes);
-let g_sharp_aeolian_scale = make_minor("G#", music_notes);
-
-//declare locrian scales
-let a_locrian_scale = make_major("A#", music_notes);
-let a_sharp_locrian_scale = make_major("B", music_notes);
-let b_locrian_scale = make_major("C", music_notes);
-let c_locrian_scale = make_major("C#", music_notes);
-let c_sharp_locrian_scale = make_major("D", music_notes);
-let d_locrian_scale = make_major("D#", music_notes);
-let d_sharp_locrian_scale = make_major("E", music_notes);
-let e_locrian_scale = make_major("F", music_notes);
-let f_locrian_scale = make_major("F#", music_notes);
-let f_sharp_locrian_scale = make_major("G", music_notes);
-let g_locrian_scale = make_major("G#", music_notes);
-let g_sharp_locrian_scale = make_major("A", music_notes);
 
 
 var recorded_notes = [];
@@ -484,67 +252,67 @@ function find_scale() {
     //ADD EXTRA SCALES TO LOOP HERE
     //loop through all scales, check if they contain subset of notes in parameter, add to list if they do
     let containing_scales = [];
-    for (let i = 0; i < major_scales.length; i++) {
-      if (recorded_notes.every(val => major_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(major_scales[i][0] + " major (ionian)");
-        containing_scales.push(dorian_scales[(i + 2) % 12][1] + " dorian");
-        containing_scales.push(phrygian_scales[(i + 4) % 12][2] + " phrygian");
-        containing_scales.push(lydian_scales[(i + 5) % 12][3] + " lydian");
-        containing_scales.push(mixolydian_scales[(i + 7) % 12][4] + " mixolydian");
-        containing_scales.push(locrian_scales[(i + 11) % 12][6] + " locrian");
+    for (let i = 0; i < this.scales.major_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.major_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.major_scales[i][0] + " major (ionian)");
+        containing_scales.push(this.scales.dorian_scales[(i + 2) % 12][1] + " dorian");
+        containing_scales.push(this.scales.phrygian_scales[(i + 4) % 12][2] + " phrygian");
+        containing_scales.push(this.scales.lydian_scales[(i + 5) % 12][3] + " lydian");
+        containing_scales.push(this.scales.mixolydian_scales[(i + 7) % 12][4] + " mixolydian");
+        containing_scales.push(this.scales.locrian_scales[(i + 11) % 12][6] + " locrian");
       }
     }
 
-    for (let i = 0; i < minor_scales.length; i++) {
-      if (recorded_notes.every(val => minor_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(minor_scales[i][0] + " minor (aeolian)");
+    for (let i = 0; i < this.scales.minor_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.minor_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.minor_scales[i][0] + " minor (aeolian)");
       }
     }
 
-    for (let i = 0; i < minor_pentatonic_scales.length; i++) {
-      if (recorded_notes.every(val => minor_pentatonic_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(minor_pentatonic_scales[i][0] + " minor pentatonic");
+    for (let i = 0; i < this.scales.minor_pentatonic_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.minor_pentatonic_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.minor_pentatonic_scales[i][0] + " minor pentatonic");
       }
     }
 
-    for (let i = 0; i < major_pentatonic_scales.length; i++) {
-      if (recorded_notes.every(val => major_pentatonic_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(major_pentatonic_scales[i][0] + " major pentatonic");
+    for (let i = 0; i < this.scales.major_pentatonic_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.major_pentatonic_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.major_pentatonic_scales[i][0] + " major pentatonic");
       }
     }
-    for (let i = 0; i < minor_melodic_scales.length; i++) {
-      if (recorded_notes.every(val => minor_melodic_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(minor_melodic_scales[i][0] + " melodic minor");
-      }
-    }
-
-    for (let i = 0; i < minor_harmonic_scales.length; i++) {
-      if (recorded_notes.every(val => minor_harmonic_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(minor_harmonic_scales[i][0] + " harmonic minor");
+    for (let i = 0; i < this.scales.minor_melodic_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.minor_melodic_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.minor_melodic_scales[i][0] + " melodic minor");
       }
     }
 
-    for (let i = 0; i < minor_blues_scales.length; i++) {
-      if (recorded_notes.every(val => minor_blues_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(minor_blues_scales[i][0] + " blues minor");
+    for (let i = 0; i < this.scales.minor_harmonic_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.minor_harmonic_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.minor_harmonic_scales[i][0] + " harmonic minor");
       }
     }
 
-    for (let i = 0; i < major_blues_scales.length; i++) {
-      if (recorded_notes.every(val => major_blues_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(major_blues_scales[i][0] + " blues major");
+    for (let i = 0; i < this.scales.minor_blues_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.minor_blues_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.minor_blues_scales[i][0] + " blues minor");
       }
     }
 
-    for (let i = 0; i < major_bebop_scales.length; i++) {
-      if (recorded_notes.every(val => major_bebop_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(major_bebop_scales[i][0] + " bebop major");
+    for (let i = 0; i < this.scales.major_blues_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.major_blues_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.major_blues_scales[i][0] + " blues major");
       }
     }
 
-    for (let i = 0; i < minor_bebop_scales.length; i++) {
-      if (recorded_notes.every(val => minor_bebop_scales[i].indexOf(val) >= 0) == true) {
-        containing_scales.push(minor_bebop_scales[i][0] + " bebop minor");
+    for (let i = 0; i < this.scales.major_bebop_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.major_bebop_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.major_bebop_scales[i][0] + " bebop major");
+      }
+    }
+
+    for (let i = 0; i < this.scales.minor_bebop_scales.length; i++) {
+      if (recorded_notes.every(val => this.scales.minor_bebop_scales[i].indexOf(val) >= 0) == true) {
+        containing_scales.push(this.scales.minor_bebop_scales[i][0] + " bebop minor");
       }
     }
     //sends the containing scales list to be written to html and displayed
@@ -561,148 +329,148 @@ function reset_recorded_notes() {
 function scale_to_notes(scale: string) {
   let music_notes_to_return = [];
   console.log("scale: " + scale);
-  let root: number = music_notes.indexOf(scale[0]);
+  let root: number = this.scales.music_notes.indexOf(scale[0]);
 
   //if the chord has a #, it starts at 1 + the index of the letter
   if (scale[1] == "#") {
     root = root + 1;
   }
 
-  music_notes_to_return.push(music_notes[root]);
+  music_notes_to_return.push(this.scales.music_notes[root]);
   if (scale.includes("major pentatonic")) {
     console.log("major pentatonic");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 4) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 9) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 4) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
 
   }
   else if (scale.includes("dorian")) {
     console.log("dorian");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 9) % 12]);
-    music_notes_to_return.push(music_notes[(root + 10) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
   }
   else if (scale.includes("phrygian")) {
 
     console.log("phrygian");
-    music_notes_to_return.push(music_notes[(root + 1) % 12]);
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 8) % 12]);
-    music_notes_to_return.push(music_notes[(root + 10) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 1) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 8) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
   }
   else if (scale.includes("lydian")) {
     console.log("lydian");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 4) % 12]);
-    music_notes_to_return.push(music_notes[(root + 6) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 9) % 12]);
-    music_notes_to_return.push(music_notes[(root + 11) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 4) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 6) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 11) % 12]);
   }
   else if (scale.includes("mixolydian")) {
     console.log("mixolydian");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 4) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 9) % 12]);
-    music_notes_to_return.push(music_notes[(root + 10) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 4) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
   }
   else if (scale.includes("locrian")) {
     console.log("locrian");
-    music_notes_to_return.push(music_notes[(root + 1) % 12]);
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 6) % 12]);
-    music_notes_to_return.push(music_notes[(root + 8) % 12]);
-    music_notes_to_return.push(music_notes[(root + 10) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 1) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 6) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 8) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
   }
   else if (scale.includes("bebop major")) {
     console.log("bebop major");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 4) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 8) % 12]);
-    music_notes_to_return.push(music_notes[(root + 9) % 12]);
-    music_notes_to_return.push(music_notes[(root + 11) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 4) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 8) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 11) % 12]);
   }
   else if (scale.includes("blues major")) {
     console.log("blues major");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 4) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 9) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 4) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
   }
   else if (scale.includes("major")) {
     console.log("major");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 4) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 9) % 12]);
-    music_notes_to_return.push(music_notes[(root + 11) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 4) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 11) % 12]);
 
   }
   else if (scale.includes("minor pentatonic")) {
     console.log("minor pentatonic");
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 10) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
   }
 
   else if (scale.includes("blues minor")) {
     console.log("blues minor");
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 6) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 10) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 6) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
   }
   else if (scale.includes("bebop minor")) {
     console.log("bebop minor");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 4) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 8) % 12]);
-    music_notes_to_return.push(music_notes[(root + 10) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 4) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 8) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
   }
   else if (scale.includes("harmonic minor")) {
     console.log("harmonic minor");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 8) % 12]);
-    music_notes_to_return.push(music_notes[(root + 11) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 8) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 11) % 12]);
   }
   else if (scale.includes("melodic minor")) {
     console.log("melodic minor");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 9) % 12]);
-    music_notes_to_return.push(music_notes[(root + 11) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 11) % 12]);
   }
   else if (scale.includes("minor")) {
     console.log("minor");
-    music_notes_to_return.push(music_notes[(root + 2) % 12]);
-    music_notes_to_return.push(music_notes[(root + 3) % 12]);
-    music_notes_to_return.push(music_notes[(root + 5) % 12]);
-    music_notes_to_return.push(music_notes[(root + 7) % 12]);
-    music_notes_to_return.push(music_notes[(root + 8) % 12]);
-    music_notes_to_return.push(music_notes[(root + 10) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 2) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 5) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 8) % 12]);
+    music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
   }
   return music_notes_to_return;
 }
@@ -739,386 +507,7 @@ function write_scale_to_html(these_scales: string[]) {
 }
 
 
-//adds scales to a list
-function make_scales() {
-  //push major scales into array
-  major_scales.push(a_major_scale);
-  major_scales.push(a_sharp_major_scale);
-  major_scales.push(b_major_scale);
-  major_scales.push(c_major_scale);
-  major_scales.push(c_sharp_major_scale);
-  major_scales.push(d_major_scale);
-  major_scales.push(d_sharp_major_scale);
-  major_scales.push(e_major_scale);
-  major_scales.push(f_major_scale);
-  major_scales.push(f_sharp_major_scale);
-  major_scales.push(g_major_scale);
-  major_scales.push(g_sharp_major_scale);
 
-  //push minor scales into array
-  minor_scales.push(a_minor_scale);
-  minor_scales.push(a_sharp_minor_scale);
-  minor_scales.push(b_minor_scale);
-  minor_scales.push(c_minor_scale);
-  minor_scales.push(c_sharp_minor_scale);
-  minor_scales.push(d_minor_scale);
-  minor_scales.push(d_sharp_minor_scale);
-  minor_scales.push(e_minor_scale);
-  minor_scales.push(f_minor_scale);
-  minor_scales.push(f_sharp_minor_scale);
-  minor_scales.push(g_minor_scale);
-  minor_scales.push(g_sharp_minor_scale);
-
-  //push major pentatonic into array
-  major_pentatonic_scales.push(a_major_p_scale);
-  major_pentatonic_scales.push(a_sharp_major_p_scale);
-  major_pentatonic_scales.push(b_major_p_scale);
-  major_pentatonic_scales.push(c_major_p_scale);
-  major_pentatonic_scales.push(c_sharp_major_p_scale);
-  major_pentatonic_scales.push(d_major_p_scale);
-  major_pentatonic_scales.push(d_sharp_major_p_scale);
-  major_pentatonic_scales.push(e_major_p_scale);
-  major_pentatonic_scales.push(f_major_p_scale);
-  major_pentatonic_scales.push(f_sharp_major_p_scale);
-  major_pentatonic_scales.push(g_major_p_scale);
-  major_pentatonic_scales.push(g_sharp_major_p_scale);
-
-  //push minor pentatonic into array
-  minor_pentatonic_scales.push(a_minor_p_scale);
-  minor_pentatonic_scales.push(a_sharp_minor_p_scale);
-  minor_pentatonic_scales.push(b_minor_p_scale);
-  minor_pentatonic_scales.push(c_minor_p_scale);
-  minor_pentatonic_scales.push(c_sharp_minor_p_scale);
-  minor_pentatonic_scales.push(d_minor_p_scale);
-  minor_pentatonic_scales.push(d_sharp_minor_p_scale);
-  minor_pentatonic_scales.push(e_minor_p_scale);
-  minor_pentatonic_scales.push(f_minor_p_scale);
-  minor_pentatonic_scales.push(f_sharp_minor_p_scale);
-  minor_pentatonic_scales.push(g_minor_p_scale);
-  minor_pentatonic_scales.push(g_sharp_minor_p_scale);
-
-  minor_melodic_scales.push(a_minor_melodic_scale);
-  minor_melodic_scales.push(a_sharp_minor_melodic_scale);
-  minor_melodic_scales.push(b_minor_melodic_scale);
-  minor_melodic_scales.push(c_minor_melodic_scale);
-  minor_melodic_scales.push(c_sharp_minor_melodic_scale);
-  minor_melodic_scales.push(d_minor_melodic_scale);
-  minor_melodic_scales.push(d_sharp_minor_melodic_scale);
-  minor_melodic_scales.push(e_minor_melodic_scale);
-  minor_melodic_scales.push(f_minor_melodic_scale);
-  minor_melodic_scales.push(f_sharp_minor_melodic_scale);
-  minor_melodic_scales.push(g_minor_melodic_scale);
-  minor_melodic_scales.push(g_sharp_minor_melodic_scale);
-
-  minor_harmonic_scales.push(a_minor_harmonic_scale);
-  minor_harmonic_scales.push(a_sharp_minor_harmonic_scale);
-  minor_harmonic_scales.push(b_minor_harmonic_scale);
-  minor_harmonic_scales.push(c_minor_harmonic_scale);
-  minor_harmonic_scales.push(c_sharp_minor_harmonic_scale);
-  minor_harmonic_scales.push(d_minor_harmonic_scale);
-  minor_harmonic_scales.push(d_sharp_minor_harmonic_scale);
-  minor_harmonic_scales.push(e_minor_harmonic_scale);
-  minor_harmonic_scales.push(f_minor_harmonic_scale);
-  minor_harmonic_scales.push(f_sharp_minor_harmonic_scale);
-  minor_harmonic_scales.push(g_minor_harmonic_scale);
-  minor_harmonic_scales.push(g_sharp_minor_harmonic_scale);
-
-  minor_blues_scales.push(a_minor_blues_scale);
-  minor_blues_scales.push(a_sharp_minor_blues_scale);
-  minor_blues_scales.push(b_minor_blues_scale);
-  minor_blues_scales.push(c_minor_blues_scale);
-  minor_blues_scales.push(c_sharp_minor_blues_scale);
-  minor_blues_scales.push(d_minor_blues_scale);
-  minor_blues_scales.push(d_sharp_minor_blues_scale);
-  minor_blues_scales.push(e_minor_blues_scale);
-  minor_blues_scales.push(f_minor_blues_scale);
-  minor_blues_scales.push(f_sharp_minor_blues_scale);
-  minor_blues_scales.push(g_minor_blues_scale);
-  minor_blues_scales.push(g_sharp_minor_blues_scale);
-
-  major_blues_scales.push(a_major_blues_scale);
-  major_blues_scales.push(a_sharp_major_blues_scale);
-  major_blues_scales.push(b_major_blues_scale);
-  major_blues_scales.push(c_major_blues_scale);
-  major_blues_scales.push(c_sharp_major_blues_scale);
-  major_blues_scales.push(d_major_blues_scale);
-  major_blues_scales.push(d_sharp_major_blues_scale);
-  major_blues_scales.push(e_major_blues_scale);
-  major_blues_scales.push(f_major_blues_scale);
-  major_blues_scales.push(f_sharp_major_blues_scale);
-  major_blues_scales.push(g_major_blues_scale);
-  major_blues_scales.push(g_sharp_major_blues_scale);
-
-  locrian_scales.push(a_locrian_scale);
-  locrian_scales.push(a_sharp_locrian_scale);
-  locrian_scales.push(b_locrian_scale);
-  locrian_scales.push(c_locrian_scale);
-  locrian_scales.push(c_sharp_locrian_scale);
-  locrian_scales.push(d_locrian_scale);
-  locrian_scales.push(d_sharp_locrian_scale);
-  locrian_scales.push(e_locrian_scale);
-  locrian_scales.push(f_locrian_scale);
-  locrian_scales.push(f_sharp_locrian_scale);
-  locrian_scales.push(g_locrian_scale);
-  locrian_scales.push(g_sharp_locrian_scale);
-
-  dorian_scales.push(a_dorian_scale);
-  dorian_scales.push(a_sharp_dorian_scale);
-  dorian_scales.push(b_dorian_scale);
-  dorian_scales.push(c_dorian_scale);
-  dorian_scales.push(c_sharp_dorian_scale);
-  dorian_scales.push(d_dorian_scale);
-  dorian_scales.push(d_sharp_dorian_scale);
-  dorian_scales.push(e_dorian_scale);
-  dorian_scales.push(f_dorian_scale);
-  dorian_scales.push(f_sharp_dorian_scale);
-  dorian_scales.push(g_dorian_scale);
-  dorian_scales.push(g_sharp_dorian_scale);
-
-  mixolydian_scales.push(a_mixolydian_scale);
-  mixolydian_scales.push(a_sharp_mixolydian_scale);
-  mixolydian_scales.push(b_mixolydian_scale);
-  mixolydian_scales.push(c_mixolydian_scale);
-  mixolydian_scales.push(c_sharp_mixolydian_scale);
-  mixolydian_scales.push(d_mixolydian_scale);
-  mixolydian_scales.push(d_sharp_mixolydian_scale);
-  mixolydian_scales.push(e_mixolydian_scale);
-  mixolydian_scales.push(f_mixolydian_scale);
-  mixolydian_scales.push(f_sharp_mixolydian_scale);
-  mixolydian_scales.push(g_mixolydian_scale);
-  mixolydian_scales.push(g_sharp_mixolydian_scale);
-
-  lydian_scales.push(a_lydian_scale);
-  lydian_scales.push(a_sharp_lydian_scale);
-  lydian_scales.push(b_lydian_scale);
-  lydian_scales.push(c_lydian_scale);
-  lydian_scales.push(c_sharp_lydian_scale);
-  lydian_scales.push(d_lydian_scale);
-  lydian_scales.push(d_sharp_lydian_scale);
-  lydian_scales.push(e_lydian_scale);
-  lydian_scales.push(f_lydian_scale);
-  lydian_scales.push(f_sharp_lydian_scale);
-  lydian_scales.push(g_lydian_scale);
-  lydian_scales.push(g_sharp_lydian_scale);
-
-  phrygian_scales.push(a_phrygian_scale);
-  phrygian_scales.push(a_sharp_phrygian_scale);
-  phrygian_scales.push(b_phrygian_scale);
-  phrygian_scales.push(c_phrygian_scale);
-  phrygian_scales.push(c_sharp_phrygian_scale);
-  phrygian_scales.push(d_phrygian_scale);
-  phrygian_scales.push(d_sharp_phrygian_scale);
-  phrygian_scales.push(e_phrygian_scale);
-  phrygian_scales.push(f_phrygian_scale);
-  phrygian_scales.push(f_sharp_phrygian_scale);
-  phrygian_scales.push(g_phrygian_scale);
-  phrygian_scales.push(g_sharp_phrygian_scale);
-
-  aeolian_scales.push(a_aeolian_scale);
-  aeolian_scales.push(a_sharp_aeolian_scale);
-  aeolian_scales.push(b_aeolian_scale);
-  aeolian_scales.push(c_aeolian_scale);
-  aeolian_scales.push(c_sharp_aeolian_scale);
-  aeolian_scales.push(d_aeolian_scale);
-  aeolian_scales.push(d_sharp_aeolian_scale);
-  aeolian_scales.push(e_aeolian_scale);
-  aeolian_scales.push(f_aeolian_scale);
-  aeolian_scales.push(f_sharp_aeolian_scale);
-  aeolian_scales.push(g_aeolian_scale);
-  aeolian_scales.push(g_sharp_aeolian_scale);
-
-  major_bebop_scales.push(a_major_bebop_scale);
-  major_bebop_scales.push(a_sharp_major_bebop_scale);
-  major_bebop_scales.push(b_major_bebop_scale);
-  major_bebop_scales.push(c_major_bebop_scale);
-  major_bebop_scales.push(c_sharp_major_bebop_scale);
-  major_bebop_scales.push(d_major_bebop_scale);
-  major_bebop_scales.push(d_sharp_major_bebop_scale);
-  major_bebop_scales.push(e_major_bebop_scale);
-  major_bebop_scales.push(f_major_bebop_scale);
-  major_bebop_scales.push(f_sharp_major_bebop_scale);
-  major_bebop_scales.push(g_major_bebop_scale);
-  major_bebop_scales.push(g_sharp_major_bebop_scale);
-
-  minor_bebop_scales.push(a_minor_bebop_scale);
-  minor_bebop_scales.push(a_sharp_minor_bebop_scale);
-  minor_bebop_scales.push(b_minor_bebop_scale);
-  minor_bebop_scales.push(c_minor_bebop_scale);
-  minor_bebop_scales.push(c_sharp_minor_bebop_scale);
-  minor_bebop_scales.push(d_minor_bebop_scale);
-  minor_bebop_scales.push(d_sharp_minor_bebop_scale);
-  minor_bebop_scales.push(e_minor_bebop_scale);
-  minor_bebop_scales.push(f_minor_bebop_scale);
-  minor_bebop_scales.push(f_sharp_minor_bebop_scale);
-  minor_bebop_scales.push(g_minor_bebop_scale);
-  minor_bebop_scales.push(g_sharp_minor_bebop_scale);
-
-}
-
-//these functions turn one note into a scale
-function make_major(start_note, notes) {
-  let return_scale: string[] = [];
-  for (var i = 0; i < 12; i++) {
-    if (notes[i] == start_note) {
-      break;
-    }
-  }
-  return_scale.push(notes[i % 12]);
-  return_scale.push(notes[(i + 2) % 12]);
-  return_scale.push(notes[(i + 4) % 12]);
-  return_scale.push(notes[(i + 5) % 12]);
-  return_scale.push(notes[(i + 7) % 12]);
-  return_scale.push(notes[(i + 9) % 12]);
-  return_scale.push(notes[(i + 11) % 12]);
-  return return_scale;
-
-}
-
-function make_minor(start_note, notes) {
-  let return_scale: string[] = [];
-  for (var i = 0; i < 12; i++) {
-    if (notes[i] == start_note) {
-      break;
-    }
-  }
-  return_scale[0] = notes[i % 12];
-  return_scale[1] = notes[(i + 2) % 12];
-  return_scale[2] = notes[(i + 3) % 12];
-  return_scale[3] = notes[(i + 5) % 12];
-  return_scale[4] = notes[(i + 7) % 12];
-  return_scale[5] = notes[(i + 8) % 12];
-  return_scale[6] = notes[(i + 10) % 12];
-
-  return return_scale;
-
-}
-
-function make_pentatonic_major(start_note, notes) {
-  let return_scale: string[] = [];
-  for (var i = 0; i < 12; i++) {
-    if (notes[i] == start_note) {
-      break;
-    }
-  }
-  return_scale[0] = notes[i % 12];
-  return_scale[1] = notes[(i + 2) % 12];
-  return_scale[2] = notes[(i + 4) % 12];
-  return_scale[3] = notes[(i + 7) % 12];
-  return_scale[4] = notes[(i + 9) % 12];
-
-  return return_scale;
-
-}
-
-function make_pentatonic_minor(start_note, notes) {
-  let return_scale: string[] = [];
-  for (var i = 0; i < 12; i++) {
-    if (notes[i] == start_note) {
-      break;
-    }
-  }
-  return_scale[0] = notes[i % 12];
-  return_scale[1] = notes[(i + 3) % 12];
-  return_scale[2] = notes[(i + 5) % 12];
-  return_scale[3] = notes[(i + 7) % 12];
-  return_scale[4] = notes[(i + 10) % 12];
-
-  return return_scale;
-
-}
-
-function make_melodic_minor(start_note, notes) {
-  let return_scale: string[] = [];
-  for (var i = 0; i < 12; i++) {
-    if (notes[i] == start_note) {
-      break;
-    }
-  }
-  return_scale[0] = notes[i % 12];
-  return_scale[1] = notes[(i + 2) % 12];
-  return_scale[2] = notes[(i + 3) % 12];
-  return_scale[3] = notes[(i + 5) % 12];
-  return_scale[4] = notes[(i + 7) % 12];
-  return_scale[5] = notes[(i + 9) % 12];
-  return_scale[6] = notes[(i + 11) % 12];
-
-  return return_scale;
-}
-
-function make_harmonic_minor(start_note, notes) {
-  let return_scale: string[] = [];
-  for (var i = 0; i < 12; i++) {
-    if (notes[i] == start_note) {
-      break;
-    }
-  }
-  return_scale[0] = notes[i % 12];
-  return_scale[1] = notes[(i + 2) % 12];
-  return_scale[2] = notes[(i + 3) % 12];
-  return_scale[3] = notes[(i + 5) % 12];
-  return_scale[4] = notes[(i + 7) % 12];
-  return_scale[5] = notes[(i + 8) % 12];
-  return_scale[6] = notes[(i + 11) % 12];
-
-  return return_scale;
-}
-
-function make_minor_blues(start_note, notes) {
-  let return_scale: string[] = [];
-  for (var i = 0; i < 12; i++) {
-    if (notes[i] == start_note) {
-      break;
-    }
-  }
-  return_scale[0] = notes[i % 12];
-  return_scale[2] = notes[(i + 3) % 12];
-  return_scale[3] = notes[(i + 5) % 12];
-  return_scale[4] = notes[(i + 6) % 12];
-  return_scale[5] = notes[(i + 7) % 12];
-  return_scale[6] = notes[(i + 10) % 12];
-
-  return return_scale;
-
-}
-
-function make_bebop_major(start_note, notes) {
-  let return_scale: string[] = [];
-  for (var i = 0; i < 12; i++) {
-    if (notes[i] == start_note) {
-      break;
-    }
-  }
-  return_scale.push(notes[i % 12]);
-  return_scale.push(notes[(i + 2) % 12]);
-  return_scale.push(notes[(i + 4) % 12]);
-  return_scale.push(notes[(i + 5) % 12]);
-  return_scale.push(notes[(i + 7) % 12]);
-  return_scale.push(notes[(i + 8) % 12]);
-  return_scale.push(notes[(i + 9) % 12]);
-  return_scale.push(notes[(i + 11) % 12]);
-  return return_scale;
-
-}
-
-function make_bebop_minor(start_note, notes) {
-  let return_scale: string[] = [];
-  for (var i = 0; i < 12; i++) {
-    if (notes[i] == start_note) {
-      break;
-    }
-  }
-  return_scale.push(notes[i % 12]);
-  return_scale.push(notes[(i + 2) % 12]);
-  return_scale.push(notes[(i + 3) % 12]);
-  return_scale.push(notes[(i + 4) % 12]);
-  return_scale.push(notes[(i + 5) % 12]);
-  return_scale.push(notes[(i + 7) % 12]);
-  return_scale.push(notes[(i + 9) % 12]);
-  return_scale.push(notes[(i + 10) % 12]);
-
-  return return_scale;
-
-}
 
 //clears an html element
 function clearBox(elementID) {
