@@ -1,26 +1,19 @@
 <ion-header no-border>
     <ion-toolbar>
-        <ion-title>Home</ion-title>
-
-
-        <ion-buttons start class="toolbar-button">
-            <button ion-button icon-only menuToggle color="dark" clear>Home</button>
+        <ion-buttons end class="toolbar-button" (click)="goToHomePage()">
+            <button ion-button icon-only color="dark" clear>Home</button>
         </ion-buttons>
 
-        <ion-buttons start class="toolbar-button">
-            <button ion-button icon-only menuToggle color="dark" clear>Features</button>
+        <ion-buttons end class="toolbar-button" (click)="goToFinderPage()">
+            <button ion-button icon-only color="dark" clear>Finder</button>
         </ion-buttons>
 
-        <ion-buttons start class="toolbar-button">
-            <button ion-button icon-only menuToggle color="dark" clear>Finder</button>
+        <ion-buttons end class="toolbar-button" (click)="goToScalesPage()">
+            <button ion-button icon-only color="dark" clear>Scales</button>
         </ion-buttons>
 
-        <ion-buttons start class="toolbar-button">
-            <button ion-button icon-only menuToggle color="dark" clear>Scales</button>
-        </ion-buttons>
-
-        <ion-buttons start class="toolbar-button">
-            <button ion-button icon-only menuToggle color="dark" clear>Tuner</button>
+        <ion-buttons end class="toolbar-button" (click)="goToTunerPage()">
+            <button ion-button icon-only color="dark" clear>Tuner</button>
         </ion-buttons>
 
         <ion-buttons start class="toolbar-toggle-button">
@@ -28,8 +21,6 @@
               <ion-icon name="ios-menu-outline" ></ion-icon>
           </button>
         </ion-buttons>
-
-
 
 
     </ion-toolbar>
