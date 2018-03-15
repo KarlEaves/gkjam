@@ -1,3 +1,5 @@
+import { Scales } from './../assets/music-classes/Scales';
+// import { Scales } from './assets/music-classes/Scales';
 import { ScaleDescriptionPage } from './../pages/scale-description/scale-description';
 import { ContactUsComponent } from './../components/contact-us/contact-us';
 import { ImageSectionComponent } from './../components/image-section/image-section';
@@ -20,6 +22,8 @@ import { PopoverPage } from '../pages/popover/popover';
 import { PentatonicPopoverPage } from '../pages/pentatonic-popover/pentatonic-popover';
 import { JazzPopoverPage } from '../pages/jazz-popover/jazz-popover';
 import { TunerPage } from '../pages/tuner/tuner';
+import { HttpModule } from '@angular/http';
+
 
 
 @NgModule({
@@ -39,11 +43,13 @@ import { TunerPage } from '../pages/tuner/tuner';
     FeaturesComponent,
     ImageSectionComponent,
     ContactUsComponent,
-    ScaleDescriptionPage
-  ],
+    ScaleDescriptionPage,
+    ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -63,10 +69,11 @@ import { TunerPage } from '../pages/tuner/tuner';
     ImageSectionComponent,
     ContactUsComponent,
     ScaleDescriptionPage
-  ],
+    ],
   providers: [
     StatusBar,
     SplashScreen,
+    Scales,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

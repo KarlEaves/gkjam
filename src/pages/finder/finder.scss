@@ -3,53 +3,42 @@ page-finder {
         padding: 10px 20px;
         font-size: 20px;
         border-radius: 10px;
-        width:25%;
+        width: 25%;
     }
-    
-    
-    .mystyle{
-        font-weight:bold;
+    .mystyle {
+        font-weight: bold;
     }
-    
-    
-    .scales{
+    .scales {
         text-align: center;
         border-bottom: .1em solid blue;
-        color: white;
-        height:3em;
+        color: rgb(155, 51, 51);
+        height: 3em;
     }
-    
-    .container{
+    .container1 {
         background-color: rgb(26, 25, 25);
-        padding:2%;
+        padding: 2%;
     }
-    
-    #buttonToTurnChordsToKey{
-        float:right;
-        height:100%;
-        width:25%;
+    #buttonToTurnChordsToKey {
+        float: right;
+        height: 100%;
+        width: 25%;
     }
-    
-    
     #noteInList {
-        padding-left:.5em;
-        padding-right:.5em;
+        padding-left: .5em;
+        padding-right: .5em;
         padding-bottom: .5em;
-        padding-top:.5em;
-        width:3%;
-        text-align:center;
-         border: .1em solid black;
-         background-color:rgb(68, 68, 68);
-         color:white;
-         border-radius: .5em;
-         font-size:1em;
-         font-family: "Lucida Console";
-         font-weight:bold;
-      }
-    
-      .space{
-          margin:3%;
-      }
-    
-      
+        padding-top: .5em;
+        width: 3%;
+        text-align: center;
+        border: .1em solid black;
+        background-color: rgb(68, 68, 68);
+        color: rgb(95, 6, 6);
+        border-radius: .5em;
+        font-size: 1em;
+        font-family: "Lucida Console";
+        font-weight: bold;
+    }
+    .space {
+        margin: 3%;
+    }
 }

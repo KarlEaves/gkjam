@@ -1,8 +1,11 @@
+import { FinderPage } from './../finder/finder';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FinderPage } from '../finder/finder';
 import { ScalesPage } from '../scales/scales';
 import { TunerPage } from '../tuner/tuner';
+
+declare var $:any;
+
 
 @Component({
   selector: 'page-home',
@@ -21,9 +24,13 @@ export class HomePage {
   ionViewDidEnter(){
   }
   
-  goToTunerPage()
+  goToHomePage()
   {
-    this.navCtrl.push(TunerPage);
+    this.navCtrl.push(HomePage);
+  }
+  goToFinderPage()
+  {
+    this.navCtrl.push(FinderPage);
   }
 
   goToScalesPage(buttonclicked)
@@ -31,4 +38,11 @@ export class HomePage {
     let test = buttonclicked;
     this.navCtrl.push(ScalesPage,{test});
   }
+
+  goToTunerPage()
+  {
+    this.navCtrl.push(TunerPage);
+  }
+
+ 
 }
