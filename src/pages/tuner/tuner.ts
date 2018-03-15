@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams, AlertController, Platform } from '
 //This... 
 import { MediaPlugin } from 'ionic-native';
 
-import {HttpModule}
 
 /**
  * Generated class for the TunerPage page.
@@ -21,14 +20,16 @@ import {HttpModule}
 
 export class TunerPage {
 
-  
 
 
 
 
-  constructor( public scales: Scales, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public plt: Platform) {
+
+  constructor(public scales: Scales, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public plt: Platform) {
 
   }
+
+  
 
   public startApplicationRecording() {
 
@@ -43,18 +44,18 @@ export class TunerPage {
 
   }
 
-  public startWebRecording(){
-      console.log("desktop");
+  public startWebRecording() {
+    isRecording = true;
+    console.log("desktop");
+    this.initialize();
   }
 
   //start recording is called when the button is clicked. it checks which device the user is on, and does code based on that
-  public startRecording(){
-    if ((this.plt.is('ios')) || (this.plt.is('android')))
-    {
+  public startRecording() {
+    if ((this.plt.is('ios')) || (this.plt.is('android'))) {
       this.startApplicationRecording();
     }
-    if (this.plt.is('core'))
-    {
+    if (this.plt.is('core')) {
       this.startWebRecording();
     }
   }
@@ -74,7 +75,7 @@ export class TunerPage {
     var C2 = 65.41; // C2 note, in Hz.
 
     var notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-    var test_frequencies = [];
+
     for (var i = 0; i < 30; i++) {
       var note_frequency = C2 * Math.pow(2, i / 12);
       var note_name = notes[i % 12];
@@ -83,147 +84,128 @@ export class TunerPage {
       var just_below = { "frequency": note_frequency * Math.pow(2, -1 / 48), "name": note_name + " (a bit flat)" };
       test_frequencies = test_frequencies.concat([just_below, note, just_above]);
     }
-    if (typeof (correlation_worker) == "undefined") {
-      var correlation_worker = new Worker("./assets/correlation_worker.js");
-    }
+    correlation_worker.addEventListener("message", this.interpret_correlation_result);
+  }
 
-    correlation_worker.addEventListener("message", interpret_correlation_result);
 
-    //called when button is hit, calls initialize
-    function start_recording() {
-      if (recording == false) {
-        initialize();
-        recording = true;
-      }
-    }
+  initialize() {
+    var get_user_media = navigator.getUserMedia;
+    //  get_user_media = get_user_media || navigator.webkitGetUserMedia;
+    //  get_user_media = get_user_media || navigator.mozGetUserMedia;
+    get_user_media.call(navigator, { "audio": true }, this.use_stream, function () { });
+  }
 
-    //asks user to use mic, calls use_stream
-    function initialize() {
-      var get_user_media = navigator.getUserMedia;
-      //  get_user_media = get_user_media || navigator.webkitGetUserMedia;
-      //  get_user_media = get_user_media || navigator.mozGetUserMedia;
-      get_user_media.call(navigator, { "audio": true }, use_stream, function () { });
-    }
+  
 
-    function add_to_recorded_notes(note) {
-      let note_to_add: string;
-      note_to_add = note[0];
-      if (note[1] == "#") {
-        note_to_add = note_to_add + note[1];
-      }
-      if (recorded_notes.indexOf(note_to_add) == -1) {
-        recorded_notes.push(note_to_add);
-      }
-    }
-
-    function use_stream(stream) {
-      var AudioContext = (<any>window).AudioContext // Default
+  use_stream(stream) {
+    var AudioContext = (<any>window).AudioContext // Default
       || (<any>window).webkitAudioContext // Safari and old versions of Chrome
-      || false;      
-      
-      
-      var audio_context = new AudioContext();
+      || false;
 
-      var microphone = audio_context.createMediaStreamSource(stream);
-      (<any>window).source = microphone; // Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=934512
-      console.log("set mic");
-      var script_processor = audio_context.createScriptProcessor(1024, 1, 1);
-      script_processor.connect(audio_context.destination);
-      microphone.connect(script_processor);
-      var buffer = [];
-      var sample_length_milliseconds = 100;
-      var recording = true;
-      // Need to leak this function into the global namespace so it doesn't get
-      // prematurely garbage-collected.
-      // http://lists.w3.org/Archives/Public/public-audio/2013JanMar/0304.html
-      (<any>window).capture_audio = function (event) {
-        if (!recording) {
-          return;
-        }
-        buffer = buffer.concat(Array.prototype.slice.call(event.inputBuffer.getChannelData(0)));
 
-        // Stop recording after sample_length_milliseconds.
-        if (buffer.length > sample_length_milliseconds * audio_context.sampleRate / 1000) {
-          //    console.log("wut");
-          recording = false;
-          correlation_worker.postMessage
-            (
-            {
-              "timeseries": buffer,
-              "test_frequencies": test_frequencies,
-              "sample_rate": audio_context.sampleRate
-            }
-            );
-          buffer = [];
-          //  console.log("why god");
-          setTimeout(function () { recording = true; }, 250);
-        }
-      };
-      script_processor.onaudioprocess = (<any>window).capture_audio;
-    }
+    var audio_context = new AudioContext();
 
-    function interpret_correlation_result(event) {
-      if (recording == true) {
-        var timeseries = event.data.timeseries;
-        var frequency_amplitudes = event.data.frequency_amplitudes;
-        // Compute the (squared) magnitudes of the complex amplitudes for each
-        // test frequency.
-        var magnitudes = frequency_amplitudes.map(function (z) { return z[0] * z[0] + z[1] * z[1]; });
-        // Find the maximum in the list of magnitudes.
-        var maximum_index = -1;
-        var maximum_magnitude = 0;
-        for (var i = 0; i < magnitudes.length; i++) {
-          if (magnitudes[i] <= maximum_magnitude)
-            continue;
-          maximum_index = i;
-          maximum_magnitude = magnitudes[i];
-        }
-        // Compute the average magnitude. We'll only pay attention to frequencies
-        // with magnitudes significantly above average.
-        var average = magnitudes.reduce(function (a, b) { return a + b; }, 0) / magnitudes.length;
-        var confidence = maximum_magnitude / average;
-        var confidence_threshold = 10; // empirical, arbitrary.
-        if (confidence > confidence_threshold) {
-          var dominant_frequency = test_frequencies[maximum_index];
-          document.getElementById("note-name").textContent = dominant_frequency.name;
-          document.getElementById("frequency").textContent = dominant_frequency.frequency;
-          console.log("name: " + dominant_frequency.name);
-          console.log("frequency:" + dominant_frequency.frequency);
-          add_to_recorded_notes(dominant_frequency.name);
-          console.log(recorded_notes);
-        }
+    var microphone = audio_context.createMediaStreamSource(stream);
+    (<any>window).source = microphone; // Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=934512
+    console.log("set mic");
+    var script_processor = audio_context.createScriptProcessor(1024, 1, 1);
+    script_processor.connect(audio_context.destination);
+    microphone.connect(script_processor);
+    var buffer = [];
+    var sample_length_milliseconds = 100;
+    var recording = true;
+    // Need to leak this function into the global namespace so it doesn't get
+    // prematurely garbage-collected.
+    // http://lists.w3.org/Archives/Public/public-audio/2013JanMar/0304.html
+    (<any>window).capture_audio = function (event) {
+      if (!recording) {
+        return;
+      }
+      buffer = buffer.concat(Array.prototype.slice.call(event.inputBuffer.getChannelData(0)));
+
+      // Stop recording after sample_length_milliseconds.
+      if (buffer.length > sample_length_milliseconds * audio_context.sampleRate / 1000) {
+
+        recording = false;
+        correlation_worker.postMessage
+          (
+          {
+            "timeseries": buffer,
+            "test_frequencies": test_frequencies,
+            "sample_rate": audio_context.sampleRate
+          }
+          );
+        buffer = [];
+        setTimeout(function () { recording = true; }, 250);
+      }
+    };
+    script_processor.onaudioprocess = (<any>window).capture_audio;
+  }
+
+  interpret_correlation_result(event) {
+    if (isRecording == true) {
+
+      console.log("?");
+      var timeseries = event.data.timeseries;
+      var frequency_amplitudes = event.data.frequency_amplitudes;
+      // Compute the (squared) magnitudes of the complex amplitudes for each
+      // test frequency.
+      var magnitudes = frequency_amplitudes.map(function (z) { return z[0] * z[0] + z[1] * z[1]; });
+      // Find the maximum in the list of magnitudes.
+      var maximum_index = -1;
+      var maximum_magnitude = 0;
+      for (var i = 0; i < magnitudes.length; i++) {
+        if (magnitudes[i] <= maximum_magnitude)
+          continue;
+        maximum_index = i;
+        maximum_magnitude = magnitudes[i];
+      }
+      // Compute the average magnitude. We'll only pay attention to frequencies
+      // with magnitudes significantly above average.
+      var average = magnitudes.reduce(function (a, b) { return a + b; }, 0) / magnitudes.length;
+      var confidence = maximum_magnitude / average;
+      var confidence_threshold = 10; // empirical, arbitrary.
+      if (confidence > confidence_threshold) {
+        var dominant_frequency = test_frequencies[maximum_index];
+        console.log("here");
+        document.getElementById("note-name").textContent = dominant_frequency.name;
+        document.getElementById("frequency").textContent = dominant_frequency.frequency;
+        console.log("name: " + dominant_frequency.name);
+        console.log("frequency:" + dominant_frequency.frequency);
+        add_to_recorded_notes(dominant_frequency.name);
+        console.log(recorded_notes);
       }
     }
     // Unnecessary addition of button to play an E note.
-    var note_context = new AudioContext();
-    var note_node = note_context.createOscillator();
-    var gain_node = note_context.createGain();
-    (<any>note_node).frequency
-    {
-      // value:  C2 * Math.pow(2, 4 / 12); // E, ~82.41 Hz.
-      // writable: true
-    }
-    //  (<any>note_node).frequency = C2 * Math.pow(2, 4 / 12); // E, ~82.41 Hz.
-    gain_node.gain.value = 0;
-    note_node.connect(gain_node);
-    gain_node.connect(note_context.destination);
-    note_node.start();
-    var playing = false;
+    // var note_context = new AudioContext();
+    // var note_node = note_context.createOscillator();
+    // var gain_node = note_context.createGain();
+    // (<any>note_node).frequency
+    // {
+    //   // value:  C2 * Math.pow(2, 4 / 12); // E, ~82.41 Hz.
+    //   // writable: true
+    // }
+    // //  (<any>note_node).frequency = C2 * Math.pow(2, 4 / 12); // E, ~82.41 Hz.
+    // gain_node.gain.value = 0;
+    // note_node.connect(gain_node);
+    // gain_node.connect(note_context.destination);
+    // note_node.start();
+    // var playing = false;
 
 
-    function toggle_playing_note() {
-      playing = !playing;
-      if (playing)
-        gain_node.gain.value = 0.1;
-      else
-        gain_node.gain.value = 0;
-    }
+    // function toggle_playing_note() {
+    //   playing = !playing;
+    //   if (playing)
+    //     gain_node.gain.value = 0.1;
+    //   else
+    //     gain_node.gain.value = 0;
+    // }
 
 
 
-    document.getElementById("play-note").addEventListener("click", toggle_playing_note);
+    // document.getElementById("play-note").addEventListener("click", toggle_playing_note);
 
-    document.getElementById("start_recording").addEventListener("click", start_recording);
+    document.getElementById("start_recording").addEventListener("click", this.startRecording);
 
     document.getElementById("stop_recording").addEventListener("click", find_scale);
 
@@ -233,17 +215,30 @@ export class TunerPage {
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
-var recording = false;
+var isRecording = false;
 
-
+if (typeof (correlation_worker) == "undefined") {
+  var correlation_worker = new Worker("./assets/correlation_worker.js");
+}
 
 var recorded_notes = [];
 
+var test_frequencies = [];
 
+function add_to_recorded_notes(note) {
+  let note_to_add: string;
+  note_to_add = note[0];
+  if (note[1] == "#") {
+    note_to_add = note_to_add + note[1];
+  }
+  if (recorded_notes.indexOf(note_to_add) == -1) {
+    recorded_notes.push(note_to_add);
+  }
+}
 
 //receives list of notes, loops through each scale to see if it contains a subset of the notes, and calls write_scales_to_html on scales
 function find_scale() {
-  if (recording == false) {
+  if (isRecording == false) {
     console.log("must be recording");
   }
   else {
@@ -317,7 +312,7 @@ function find_scale() {
     }
     //sends the containing scales list to be written to html and displayed
     write_scale_to_html(containing_scales);
-    recording = false;
+    isRecording = false;
     recorded_notes = [];
   }
 
