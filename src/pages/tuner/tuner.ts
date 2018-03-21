@@ -23,6 +23,7 @@ export class TunerPage {
 
 
 
+  media = new MediaPlugin('../Library/NoCloud/recording.wav');
 
 
   constructor(public scales: Scales, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public plt: Platform) { }
@@ -68,10 +69,9 @@ export class TunerPage {
   }
 
   startApplicationRecording() {
-
+    document.getElementById("isitrecording").innerHTML = "recording";
     try {
-      let media = new MediaPlugin('../Library/NoCloud/recording.wav');
-      media.startRecord();
+      this.media.startRecord();
     }
     catch (e) {
       this.showAlert('Could not start recording.');
@@ -79,10 +79,14 @@ export class TunerPage {
 
   }
 
+
   startWebRecording() {
+    console.log("yep");
     isRecording = true;
     this.initialize();
   }
+
+ 
 
   //start recording is called when the button is clicked. it checks which device the user is on, and does code based on that
   startRecording() {
