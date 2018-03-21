@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
+    <topbar></topbar>
     <ion-navbar>
         <ion-title>tuner</ion-title>
     </ion-navbar>
@@ -26,15 +26,16 @@
             <span>frequency (Hz):</span>
             <span id="frequency"></span>
         </p>
-        <hr>
-
+       
+      
         <button id="start_recording" ion-button (click)="startRecording()">Start Recording </button>
 
         <button id="stop_recording" ion-button (click) = "find_scale()" color="secondary">Stop Recording</button>
         
         <button id="reset_recording" ion-button (click) = "reset_recorded_notes()" color="dark">Restart</button>
+        
         <div id="scalePrinter"></div>
-        <hr>
+       
         <a href="https://github.com/jbergknoff/guitar-tuner">Source code</a> / <a href="http://jonathan.bergknoff.com/journal/making-a-guitar-tuner-html5">Explanatory article</a>
     </body>
 

@@ -25,7 +25,6 @@ import { TunerPage } from '../pages/tuner/tuner';
 import { HttpModule } from '@angular/http';
 
 
-
 @NgModule({
   declarations: [
     MyApp,
