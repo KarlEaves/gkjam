@@ -7,6 +7,7 @@ import { HomePage } from '../home/home';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
 import { PentatonicPopoverPage } from '../pentatonic-popover/pentatonic-popover';
 import { JazzPopoverPage } from '../jazz-popover/jazz-popover';
+import { MinorPopoverPage } from '../minor-popover/minor-popover';
 
 @IonicPage()
 @Component({
@@ -42,6 +43,21 @@ export class PopoverPage {
 
   presentJazzPopover(myEvent) {
     let popover = this.popoverCtrl.create(JazzPopoverPage);
+    popover.present({
+      ev: myEvent
+    });
+   
+    popover.onDidDismiss(data => {
+      console.log(data);
+      if(data!=null){
+         this.selectedData = data
+      }
+      this.viewCtrl.dismiss();
+    })
+  }
+
+  presentMinorPopover(myEvent) {
+    let popover = this.popoverCtrl.create(MinorPopoverPage);
     popover.present({
       ev: myEvent
     });

@@ -43,6 +43,4 @@ constructor(public navCtrl: NavController, public popoverCtrl: PopoverController
 
   }
 
-
-
 }

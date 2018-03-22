@@ -8,6 +8,7 @@ import { FinderPage } from '../../pages/finder/finder';
 import { HomePage } from '../../pages/home/home';
 import { ScalesPage } from '../../pages/scales/scales';
 import { TunerPage } from '../../pages/tuner/tuner';
+import { ScaleGatewayPage } from '../../pages/scale-gateway/scale-gateway';
 
 /**
  * Generated class for the TopbarComponent component.
@@ -27,10 +28,9 @@ export class TopbarComponent {
   }
 
 
-  goToScalesPage(buttonclicked)
+  goToScalesGatewayPage()
   {
-    let test = buttonclicked;
-    this.navCtrl.push(ScalesPage,{test});
+    this.navCtrl.push(ScaleGatewayPage);
   }
 
   goToTunerPage()

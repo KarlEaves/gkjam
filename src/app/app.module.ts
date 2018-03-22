@@ -25,7 +25,12 @@ import { PentatonicPopoverPage } from '../pages/pentatonic-popover/pentatonic-po
 import { JazzPopoverPage } from '../pages/jazz-popover/jazz-popover';
 import { TunerPage } from '../pages/tuner/tuner';
 import { HttpModule } from '@angular/http';
+
 import { ModalPage } from '../pages/modal/modal';
+
+import { MinorPopoverPage } from '../pages/minor-popover/minor-popover';
+import { ScaleGatewayPage } from '../pages/scale-gateway/scale-gateway';
+
 
 
 @NgModule({
@@ -39,6 +44,7 @@ import { ModalPage } from '../pages/modal/modal';
     PopoverPage,
     PentatonicPopoverPage,
     JazzPopoverPage,
+    MinorPopoverPage,
     TunerPage,
     HeaderOverlayComponent,
     AboutComponent,
@@ -48,7 +54,9 @@ import { ModalPage } from '../pages/modal/modal';
     ScaleDescriptionPage,
     ModalPage,
     FindscalesmodalPage,
-    ResultsmodalPage
+    ResultsmodalPage,
+    ScaleGatewayPage
+
     ],
   imports: [
     BrowserModule,
@@ -67,6 +75,7 @@ import { ModalPage } from '../pages/modal/modal';
     PopoverPage,
     PentatonicPopoverPage,
     JazzPopoverPage,
+    MinorPopoverPage,
     TunerPage,
     HeaderOverlayComponent,
     AboutComponent,
@@ -76,7 +85,9 @@ import { ModalPage } from '../pages/modal/modal';
     ScaleDescriptionPage,
     ModalPage,
     FindscalesmodalPage,
-    ResultsmodalPage
+    ResultsmodalPage,
+    ScaleGatewayPage
+
     ],
   providers: [
     StatusBar,

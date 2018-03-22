@@ -1,0 +1,89 @@
+<!--
+  Generated template for the ScaleGatewayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <topbar></topbar>
+  <ion-navbar>
+    <ion-title>Scales</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div id = "scaleintro">
+    <p>Learning the basics of scales is one of the most important concepts in learning to jam along with your friends, favorite artists, and backing tracks. If you know what scale a song is in, you can easily jam along! </p>
+    <p>Before diving into learning scales, you should have a basic understanding musical notes. Traditional music consists of 12 notes, or semitones - A, A#, B, C, C#, D, D#, E, F, F#, G, and G#. Each note is a half step, or semitone, away from the next note.
+        A whole step is two semitones away. Let's look at an example. If we start at A, we see that A# is a half step or semitone away. B is a whole step, or two semitones, away.</p>
+    <p>Scales are defined by their KEY and TYPE. The key of a scale is determined by the root note. If your root note is C, you are playing a C scale.
+    The type of scale is defined by the distance between each note in the scale, and drastically changes the way the music sounds. Let's explore this concept a bit.</p>
+    
+    <p>For example, major scales, which produce a happy sound, start with the root note and go up by a whole step, whole step, half step, whole step, whole step, whole step, and half step back to the root.</p>
+    <p>Minor scales, which produce a more somber sound, start with the root note, go up by a whole step, half step, whole step, whole step, half step, whole step, and finally a whole step back to the root. </p>
+    <p>Check out all the different types of scales below. </p>
+  </div>
+  <div id = "grid">
+  <ion-grid>
+  
+    <ion-row>
+
+      <ion-col id = "col1">
+        <button ion-button full large (click)="goToScalesPage('major')">Major Scale</button>
+      </ion-col>
+
+      <ion-col id = "col2">
+        <button ion-button color="secondary" full large (click)="showMinors()">Minor Scales</button>
+        <p>
+          <button class = "smallButtons" ion-button color="secondary" *ngIf="minorbuttonClicked" color="secondary" (click)="goToScalesPage('Natural Minor')">Natural Minor</button>
+        </p>
+        <p>
+          <button class = "smallButtons" ion-button color="secondary" *ngIf="minorbuttonClicked" color="secondary" (click)="goToScalesPage('Melodic Minor')">Melodic Minor</button>
+        </p>
+        <p>
+          <button class = "smallButtons" ion-button color="secondary" *ngIf="minorbuttonClicked" color="secondary" (click)="goToScalesPage('Harmonic Minor')">Harmonic Minor</button>
+        </p>
+
+      </ion-col>
+
+      <ion-col id = "col3">
+        <button ion-button color="danger" (click)="showPentatonics()" full large>Pentatonic Scales</button>
+        <p>
+          <button class = "smallButtons" ion-button color="danger" *ngIf="pentatonicbuttonClicked" (click)="goToScalesPage('minpentatonic')">Minor Pentatonic</button>
+        </p>
+        <p>
+          <button class = "smallButtons" ion-button color="danger" *ngIf="pentatonicbuttonClicked" (click)="goToScalesPage('majpentatonic')">Major Pentatonic</button>
+        </p>
+      </ion-col>
+
+      <ion-col id = "col4">
+          <button ion-button color="light" (click)="showBlues()" full large>Blues Scales</button>
+          <p>
+            <button class = "smallButtons" ion-button color="light" *ngIf="bluesbuttonClicked" (click)="goToScalesPage('minpentatonic')">Minor Blues</button>
+          </p>
+          <p>
+            <button class = "smallButtons" ion-button color="light" *ngIf="bluesbuttonClicked" (click)="goToScalesPage('majpentatonic')">Major Blues</button>
+          </p>
+        </ion-col>
+
+      <ion-col id = "col5">
+        <button ion-button color="dark" full large (click)="showJazz()">Jazz Scales</button>
+
+        <p><button class = "smallButtons" ion-button color="dark" *ngIf="jazzbuttonClicked" (click)="goToScalesPage('ionian')">Ionian</button></p>
+        <p><button class = "smallButtons" ion-button color="dark" *ngIf="jazzbuttonClicked" (click)="goToScalesPage('dorian')">Dorian</button></p>
+        <p><button class = "smallButtons" ion-button color="dark" *ngIf="jazzbuttonClicked" (click)="goToScalesPage('phrygian')">Phrygian</button></p>
+        <p><button class = "smallButtons" ion-button color="dark" *ngIf="jazzbuttonClicked" (click)="goToScalesPage('lydian')">Lydian</button></p>
+        <p><button class = "smallButtons" ion-button color="dark" *ngIf="jazzbuttonClicked" (click)="goToScalesPage('mixolydian')">Mixolydian</button></p>
+        <p><button class = "smallButtons" ion-button color="dark" *ngIf="jazzbuttonClicked" (click)="goToScalesPage('aeolian')">Aeolian</button></p>
+        <p><button  class = "smallButtons" ion-button color="dark" *ngIf="jazzbuttonClicked" (click)="goToScalesPage('locrian')">Locrian</button></p>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</div>
+
+
+
+</ion-content>
