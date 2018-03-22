@@ -6,9 +6,7 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>finder</ion-title>
-    </ion-navbar>
+    <topbar></topbar>
 
 </ion-header>
 
@@ -170,8 +168,7 @@
                 </div>
 
                 <div class="col-md-8 find-scale-button">
-                    <button ion-button full id="">Find Scale</button>
-
+                    <button ion-button full id="" (click)="presentFindScalesModal()">Find Scale</button>
                 </div>
             </div>
         </ul>
@@ -183,46 +180,103 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="row">
-                                <ion-list-header>
-                                    Language
-                                </ion-list-header>
-                                <div class="col-sm-6">
+                                <div class="col-md-12">
+                                    KEYS
+                                </div>
+                                <div class="col-sm-12">
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <ion-list radio-group>
-                                                <ion-item>
-                                                    <ion-label>Go</ion-label>
-                                                    <ion-radio checked="true" value="go"></ion-radio>
+                                        <div class="col-sm-2">
+                                            <ion-list radio-group class="test">
+                                                <ion-item no-lines name="radionotebutton" id="Anote">
+                                                    <ion-label>A</ion-label>
+                                                    <ion-radio></ion-radio>
                                                 </ion-item>
 
-                                                <ion-item>
-                                                    <ion-label>Rust</ion-label>
-                                                    <ion-radio value="rust"></ion-radio>
-                                                </ion-item>
-
-                                                <ion-item>
-                                                    <ion-label>Python</ion-label>
-                                                    <ion-radio value="python" disabled="true"></ion-radio>
+                                                <ion-item no-lines name="radionotebutton" id="Asharpnote">
+                                                    <ion-label>A#</ion-label>
+                                                    <ion-radio></ion-radio>
                                                 </ion-item>
                                             </ion-list>
                                         </div>
-                                        <div class="col-sm-6">.col-sm-4</div>
+                                        <div class="col-sm-2">
+                                            <ion-list radio-group class="test">
+                                                <ion-item no-lines name="radionotebutton" id="Bnote">
+                                                    <ion-label>B</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+
+                                                <ion-item no-lines name="radionotebutton" id="Cnote">
+                                                    <ion-label>C</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+                                            </ion-list>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <ion-list radio-group class="test">
+                                                <ion-item no-lines name="radionotebutton" id="Csharpnote">
+                                                    <ion-label>C#</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+
+                                                <ion-item no-lines name="radionotebutton" id="Dnote">
+                                                    <ion-label>D</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+                                            </ion-list>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <ion-list radio-group class="test">
+                                                <ion-item no-lines name="radionotebutton" id="Dsharpnote">
+                                                    <ion-label>D#</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+                                                <ion-item no-lines name="radionotebutton" id="Enote">
+                                                    <ion-label>E</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+                                            </ion-list>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <ion-list radio-group class="test">
+                                                <ion-item no-lines name="radionotebutton" id="Fnote">
+                                                    <ion-label>F</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+
+                                                <ion-item no-lines name="radionotebutton" id="Fsharpnote">
+                                                    <ion-label>F#</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+                                            </ion-list>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <ion-list radio-group class="test">
+                                                <ion-item no-lines name="radionotebutton" id="Gnote">
+                                                    <ion-label>G</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+
+                                                <ion-item no-lines name="radionotebutton" id="Gsharpnote">
+                                                    <ion-label>G#</ion-label>
+                                                    <ion-radio></ion-radio>
+                                                </ion-item>
+                                            </ion-list>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">.col-sm-4</div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="row">
-                                <ion-list-header>
-                                    Language
-                                </ion-list-header>
-                                <div class="col-sm-6">
+                                <div class="col-md-12 scale-heading">
+                                    SCALES
+                                </div>
+                                <div class="col-sm-12">
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <ion-list radio-group>
+                                        <div class="col-sm-3">
+                                            <ion-list radio-group class="test">
 
                                                 <!-- <label class="btn btn-primary">
                                                             <input type="radio" name="radioscalebutton" id="major" checked> Major
@@ -236,41 +290,46 @@
                                                 <label class="btn btn-primary">
                                                               <input type="radio" name="radioscalebutton" id="minor_p"> Minor Pentatonic
                                                           </label> -->
-
-
                                                 <ion-item>
                                                     <ion-label>Major</ion-label>
-                                                    <ion-radio checked="true" value="major" name="radioscalebutton" id="major"></ion-radio>
+                                                    <ion-radio value="major" name="radioscalebutton" id="major"></ion-radio>
                                                 </ion-item>
-
+                                            </ion-list>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <ion-list radio-group class="test">
                                                 <ion-item>
                                                     <ion-label>Minor</ion-label>
                                                     <ion-radio value="minor" name="radioscalebutton" id="minor"></ion-radio>
                                                 </ion-item>
-
+                                            </ion-list>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <ion-list radio-group class="test">
                                                 <ion-item>
                                                     <ion-label>Major Pentatonic</ion-label>
                                                     <ion-radio value="major-pentatonic" name="radioscalebutton" id="major_p"></ion-radio>
                                                 </ion-item>
+                                            </ion-list>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <ion-list radio-group class="test">
                                                 <ion-item>
                                                     <ion-label> Minor Pentatonic</ion-label>
                                                     <ion-radio value="minor-pentatonic" name="radioscalebutton" id="minor_p"></ion-radio>
                                                 </ion-item>
                                             </ion-list>
                                         </div>
-                                        <div class="col-sm-6">.col-sm-4</div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">.col-sm-4</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
-                    Buttons
-                </div>
-                <div class="col-md-12">
-                    View Notes In Scale
+                    <div class="col-md-8 find-scale-button">
+                        <button ion-button full id="" (click)="presentNotesInScalesModal()">View Notes in Scale</button>
+                    </div>
                 </div>
             </div>
         </ul>
@@ -278,16 +337,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
+    <!-- ................... -->
 
     Display the scales that relate to notes here
 
@@ -482,7 +532,7 @@
             </label>
     </div>
     <p></p>
-    <!-- <div class="btn-group" data-toggle="buttons" id="choosescaleforscale">
+    <div class="btn-group" data-toggle="buttons" id="choosescaleforscale">
         <label class="btn btn-primary">
             <input type="radio" name="radioscalebutton" id="major" checked> Major
           </label>
@@ -495,7 +545,7 @@
         <label class="btn btn-primary">
               <input type="radio" name="radioscalebutton" id="minor_p"> Minor Pentatonic
           </label>
-    </div> -->
+    </div>
 
 
     <button id="shownotesinscale" class="btn btn-outline-primary btn-lg">View Notes in Scale</button>
