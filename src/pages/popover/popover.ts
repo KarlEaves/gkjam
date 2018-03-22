@@ -8,13 +8,6 @@ import { PopoverController } from 'ionic-angular/components/popover/popover-cont
 import { PentatonicPopoverPage } from '../pentatonic-popover/pentatonic-popover';
 import { JazzPopoverPage } from '../jazz-popover/jazz-popover';
 
-/**
- * Generated class for the PopoverPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   templateUrl: 'popover.html'

@@ -1,6 +1,7 @@
+import { PopoverPage } from './../popover/popover';
 import { FinderPage } from './../finder/finder';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { ScalesPage } from '../scales/scales';
 import { TunerPage } from '../tuner/tuner';
 
@@ -13,7 +14,7 @@ declare var $:any;
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public popoverCtrl:PopoverController, public navCtrl: NavController) {
 
   }
   
@@ -37,6 +38,13 @@ export class HomePage {
   {
     let test = buttonclicked;
     this.navCtrl.push(ScalesPage,{test});
+  }
+
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverPage);
+    popover.present({
+      ev: myEvent
+    });
   }
 
   goToTunerPage()
