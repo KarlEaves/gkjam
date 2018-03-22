@@ -17,6 +17,9 @@ declare var $:any;
 })
 export class FinderPage {
 
+  notes: string[]=['A','A#', 'B','C','C#','D','D#','E','F','F#','G','G#'];
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {};
   
 

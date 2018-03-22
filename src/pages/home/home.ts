@@ -1,6 +1,7 @@
+import { PopoverPage } from './../popover/popover';
 import { FinderPage } from './../finder/finder';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { ScalesPage } from '../scales/scales';
 import { TunerPage } from '../tuner/tuner';
 import { PopoverPage } from '../popover/popover';
@@ -15,7 +16,9 @@ declare var $: any;
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController) {
+
+constructor(public navCtrl: NavController, public popoverCtrl: PopoverController) {
+
 
   }
 
@@ -41,6 +44,7 @@ export class HomePage {
   //   });
 
   // }
+
 
 
 }
