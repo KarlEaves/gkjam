@@ -15,14 +15,22 @@ page-finder {
     }
     .view-notes-in-scale {
         padding: 10px;
-        background-color: beige;
         border-color: black;
         border-style: solid;
         border-width: 1px;
     }
     .find-scale-button {
         text-align: center;
-        margin: 4%;
+        margin: 4% auto;
+        display: block;
+    }
+    .test {
+        margin-bottom: 0%;
+        padding-left: 12%;
+        padding-right: 12%;
+    }
+    .scale-heading {
+        margin-top: 5%;
     }
     // Old
     .btn-xl {

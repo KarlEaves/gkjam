@@ -1,6 +1,7 @@
+import { ResultsmodalPage } from './../resultsmodal/resultsmodal';
 import { Scales } from './../../assets/music-classes/Scales';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Platform, ModalController } from 'ionic-angular';
 //This... 
 import { MediaPlugin } from 'ionic-native';
 
@@ -11,6 +12,9 @@ import { MediaPlugin } from 'ionic-native';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+
+declare var $: any;
+
 
 @IonicPage()
 @Component({
@@ -26,7 +30,29 @@ export class TunerPage {
   media = new MediaPlugin('../Library/NoCloud/recording.wav');
 
 
-  constructor(public scales: Scales, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public plt: Platform) { }
+  constructor(public scales: Scales, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public plt: Platform,public modalCtrl: ModalController) { }
+
+  presentResultsModal() {
+    let profileModal = this.modalCtrl.create(ResultsmodalPage);
+    profileModal.present();
+  }
+
+  showFreq(){
+    // $( document ).ready(function() {
+    //   $('.main-button-small').click(function(){
+    //     $('')
+    //   });  
+    // });
+
+    $(document).ready(function () {
+      $(".main-button-small").click(function () {
+          $("#note-name").replaceWith( "<p >...</p> " );
+      });
+  });
+
+   
+  }
+
 
 
 
@@ -444,6 +470,8 @@ export class TunerPage {
       isRecording = false;
       recorded_notes = [];
     }
+
+    this.presentResultsModal();
 
   }
 }

@@ -1,3 +1,31 @@
 page-tuner {
-
+    .main-button {
+        display: block;
+        height: 300px;
+        width: 300px;
+        border-radius: 50%;
+    }
+    .main-button-small {
+        display: block;
+        height: 250px;
+        width: 250px;
+        border-radius: 50%;
+    }
+    .buttons-section {
+        position: absolute;
+        width: 300px;
+        height: 200px;
+        z-index: 15;
+        top: 40%;
+        left: 50%;
+        margin: -100px 0 0 -150px;
+    }
+    .stop-button {
+        // visibility: hidden;
+    }
+    .restart-stop-buttons {
+        margin-top: 10%;
+        text-align: center;
+    }
+    .freq-txt {}
 }
