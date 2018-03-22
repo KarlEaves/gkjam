@@ -23,6 +23,8 @@ import { PentatonicPopoverPage } from '../pages/pentatonic-popover/pentatonic-po
 import { JazzPopoverPage } from '../pages/jazz-popover/jazz-popover';
 import { TunerPage } from '../pages/tuner/tuner';
 import { HttpModule } from '@angular/http';
+import { MinorPopoverPage } from '../pages/minor-popover/minor-popover';
+import { ScaleGatewayPage } from '../pages/scale-gateway/scale-gateway';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { HttpModule } from '@angular/http';
     PopoverPage,
     PentatonicPopoverPage,
     JazzPopoverPage,
+    MinorPopoverPage,
     TunerPage,
     HeaderOverlayComponent,
     AboutComponent,
@@ -43,6 +46,7 @@ import { HttpModule } from '@angular/http';
     ImageSectionComponent,
     ContactUsComponent,
     ScaleDescriptionPage,
+    ScaleGatewayPage
     ],
   imports: [
     BrowserModule,
@@ -61,13 +65,15 @@ import { HttpModule } from '@angular/http';
     PopoverPage,
     PentatonicPopoverPage,
     JazzPopoverPage,
+    MinorPopoverPage,
     TunerPage,
     HeaderOverlayComponent,
     AboutComponent,
     FeaturesComponent,
     ImageSectionComponent,
     ContactUsComponent,
-    ScaleDescriptionPage
+    ScaleDescriptionPage,
+    ScaleGatewayPage
     ],
   providers: [
     StatusBar,
