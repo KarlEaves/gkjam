@@ -6,18 +6,36 @@
 -->
 <ion-header>
     <topbar></topbar>
-    <ion-navbar>
-        <ion-title>tuner</ion-title>
-    </ion-navbar>
-
 </ion-header>
 
 <ion-content>
-    <html>
 
-    <head>
+    <div class="buttons-section">
+        <div>
+            <ion-buttons>
+                <button ion-button round class="main-button">    
+                    <button ion-button round color="secondary" class="main-button-small" (click)="showFreq()">                
+                        <p>Click to start listening</p>
+                        <h5 id="freq-txt">requency (Hz):</h5> 
 
-    </head>
+                        <p id="note-name">...</p> 
+                    </button>
+                </button>
+            </ion-buttons>
+        </div>
+
+        <div class="restart-stop-buttons">
+            <button ion-button round color="danger" class="stop-button" (click)="presentResultsModal()">STOP</button>
+            <button ion-button round color="light" class="restart-button">RESTART</button>
+        </div>
+
+
+
+    </div>
+
+
+
+
 
     <body>
         <p>It sounds like you're playing...</p>
@@ -26,20 +44,19 @@
             <span>frequency (Hz):</span>
             <span id="frequency"></span>
         </p>
-       
-      
+
+
         <button id="start_recording" ion-button (click)="startRecording()">Start Recording </button>
 
-        <button id="stop_recording" ion-button (click) = "find_scale()" color="secondary">Stop Recording</button>
-        
-        <button id="reset_recording" ion-button (click) = "reset_recorded_notes()" color="dark">Restart</button>
-        
+        <button id="stop_recording" ion-button (click)="find_scale()" color="secondary">Stop Recording</button>
+
+        <button id="reset_recording" ion-button (click)="reset_recorded_notes()" color="dark">Restart</button>
+
         <div id="scalePrinter"></div>
-       
+
         <a href="https://github.com/jbergknoff/guitar-tuner">Source code</a> / <a href="http://jonathan.bergknoff.com/journal/making-a-guitar-tuner-html5">Explanatory article</a>
     </body>
 
-    </html>
 </ion-content>
 
 <script>

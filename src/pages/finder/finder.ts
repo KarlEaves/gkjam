@@ -1,5 +1,7 @@
+import { FindscalesmodalPage } from './../findscalesmodal/findscalesmodal';
+import { ModalPage } from './../modal/modal';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 /**
  * Generated class for the FinderPage page.
@@ -20,7 +22,7 @@ export class FinderPage {
   notes: string[]=['A','A#', 'B','C','C#','D','D#','E','F','F#','G','G#'];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {};
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {};
   
 
   ionViewDidLoad() {
@@ -33,7 +35,20 @@ export class FinderPage {
       chords_to_scale(chord_buttons_clicked);
     }
   }
+
+  presentNotesInScalesModal() {
+    let profileModal = this.modalCtrl.create(ModalPage);
+    profileModal.present();
+  }
+
+  presentFindScalesModal() {
+    let profileModal = this.modalCtrl.create(FindscalesmodalPage);
+    profileModal.present();
+  }
+
 }
+
+
 
 
 //------------------------------------------------------------------------------

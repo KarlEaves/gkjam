@@ -1,3 +1,5 @@
+import { ResultsmodalPage } from './../pages/resultsmodal/resultsmodal';
+import { FindscalesmodalPage } from './../pages/findscalesmodal/findscalesmodal';
 import { Scales } from './../assets/music-classes/Scales';
 // import { Scales } from './assets/music-classes/Scales';
 import { ScaleDescriptionPage } from './../pages/scale-description/scale-description';
@@ -23,6 +25,7 @@ import { PentatonicPopoverPage } from '../pages/pentatonic-popover/pentatonic-po
 import { JazzPopoverPage } from '../pages/jazz-popover/jazz-popover';
 import { TunerPage } from '../pages/tuner/tuner';
 import { HttpModule } from '@angular/http';
+import { ModalPage } from '../pages/modal/modal';
 
 
 @NgModule({
@@ -43,6 +46,9 @@ import { HttpModule } from '@angular/http';
     ImageSectionComponent,
     ContactUsComponent,
     ScaleDescriptionPage,
+    ModalPage,
+    FindscalesmodalPage,
+    ResultsmodalPage
     ],
   imports: [
     BrowserModule,
@@ -67,7 +73,10 @@ import { HttpModule } from '@angular/http';
     FeaturesComponent,
     ImageSectionComponent,
     ContactUsComponent,
-    ScaleDescriptionPage
+    ScaleDescriptionPage,
+    ModalPage,
+    FindscalesmodalPage,
+    ResultsmodalPage
     ],
   providers: [
     StatusBar,
