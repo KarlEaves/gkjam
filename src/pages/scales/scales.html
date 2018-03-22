@@ -1,178 +1,26 @@
 <ion-header>
-
+    <topbar></topbar>
     <ion-navbar>
         <ion-title>
             <div id="scaleName"></div>
         </ion-title>
     </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
-
-
-
-
     <div class="container">
         <ul class="flex-container wrap">
-            <ion-card *ngFor="let note of notes" class="flex-item" (click)="openScaleDescriptionPage()">
+            <ion-card *ngFor="let array of all_arrays" class="flex-item" (click)="openScaleDescriptionPage(array[0])">
                 <ion-card-content>
                     <ion-card-title>
-                        {{note}}
+                        {{array[0]}}
                     </ion-card-title>
-                    <p>
-                        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+                    <p class="printed_notes" *ngFor="let note of array">
+                        {{note}}
                     </p>
+
                 </ion-card-content>
             </ion-card>
         </ul>
     </div>
-
-
-
-
-
-
-
-
-    <!-- <div id="differentScales">
-        <ion-grid>
-            <ion-row>
-                <ion-col>
-                    <ion-card>
-                        <img src="img/nin-live.png" />
-                        <ion-card-content>
-                            <ion-card-title>
-                                Nine Inch Nails Live
-                            </ion-card-title>
-                            <p>
-                                The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-                            </p>
-                        </ion-card-content>
-                    </ion-card>
-
-                    <div id="AScale">
-                        <div id="AscalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">A</p>
-                            <div id="notesInAScale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <div id="A#Scale">
-                        <div id="A#scalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">A#</p>
-                            <div id="notesInA#Scale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div id="BScale">
-                        <div id="BscalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">B</p>
-                            <div id="notesInBScale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <div id="CScale">
-                        <div id="CscalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">C</p>
-                            <div id="notesInCScale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div id="C#Scale">
-                        <div id="C#scalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">C#</p>
-                            <div id="notesInC#Scale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <div id="DScale">
-                        <div id="DscalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">D</p>
-                            <div id="notesInDScale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div id="D#Scale">
-                        <div id="D#scalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">D#</p>
-                            <div id="notesInD#Scale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <div id="EScale">
-                        <div id="EscalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">E</p>
-                            <div id="notesInEScale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div id="FScale">
-                        <div id="FscalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">F</p>
-                            <div id="notesInFScale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <div id="F#Scale">
-                        <div id="F#scalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">F#</p>
-                            <div id="notesInF#Scale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div id="GScale">
-                        <div id="GscalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">G</p>
-                            <div id="notesInGScale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <div id="G#Scale">
-                        <div id="G#scalePictures"></div>
-                        <div id="scaleInfo">
-                            <p style="font-weight:bold">G#</p>
-                            <div id="notesInG#Scale"></div>
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-
-        </ion-grid>
-
-    </div> -->
 </ion-content>

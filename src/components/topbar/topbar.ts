@@ -6,6 +6,8 @@ import { PopoverPage } from '../../pages/popover/popover';
 import { NavController } from 'ionic-angular/navigation/nav-controller';
 import { FinderPage } from '../../pages/finder/finder';
 import { HomePage } from '../../pages/home/home';
+import { ScalesPage } from '../../pages/scales/scales';
+import { TunerPage } from '../../pages/tuner/tuner';
 
 /**
  * Generated class for the TopbarComponent component.
@@ -23,12 +25,25 @@ export class TopbarComponent {
 
   constructor(public popoverCtrl:PopoverController,public navCtrl:NavController) {
   }
-  
+
+
+  goToScalesPage(buttonclicked)
+  {
+    let test = buttonclicked;
+    this.navCtrl.push(ScalesPage,{test});
+  }
+
+  goToTunerPage()
+  {
+    this.navCtrl.push(TunerPage);
+  }
+
   presentPopover(myEvent) {
     let popover = this.popoverCtrl.create(PopoverPage);
     popover.present({
       ev: myEvent
     });
+
   }
 goToFinderPage()
   {

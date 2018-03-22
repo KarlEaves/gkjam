@@ -21,6 +21,7 @@ export class PopoverPage {
   goToScalesPage(buttonclicked)
   {
     let test = buttonclicked;
+    console.log("button : "+buttonclicked);
     this.navCtrl.push(ScalesPage,{test});
     this.viewCtrl.dismiss();
   }
