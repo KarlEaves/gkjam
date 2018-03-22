@@ -29,7 +29,7 @@ export class TunerPage {
   constructor(public scales: Scales, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public plt: Platform) { }
 
 
-  
+
 
   showAlert(message) {
     let alert = this.alertCtrl.create({
@@ -69,7 +69,9 @@ export class TunerPage {
   }
 
   startApplicationRecording() {
+
     document.getElementById("isitrecording").innerHTML = "recording";
+
     try {
       this.media.startRecord();
     }
@@ -117,7 +119,9 @@ export class TunerPage {
     // Need to leak this function into the global namespace so it doesn't get
     // prematurely garbage-collected.
     // http://lists.w3.org/Archives/Public/public-audio/2013JanMar/0304.html
+
     (<any>window).capture_audio = function (event) {
+
       if (!recording) {
         return;
       }
@@ -125,7 +129,6 @@ export class TunerPage {
 
       // Stop recording after sample_length_milliseconds.
       if (buffer.length > sample_length_milliseconds * audio_context.sampleRate / 1000) {
-
         recording = false;
         correlation_worker.postMessage
           (
@@ -159,12 +162,16 @@ export class TunerPage {
         maximum_index = i;
         maximum_magnitude = magnitudes[i];
       }
+
+      console.log("here");
       // Compute the average magnitude. We'll only pay attention to frequencies
       // with magnitudes significantly above average.
       var average = magnitudes.reduce(function (a, b) { return a + b; }, 0) / magnitudes.length;
       var confidence = maximum_magnitude / average;
       var confidence_threshold = 10; // empirical, arbitrary.
       if (confidence > confidence_threshold) {
+
+        console.log("here2");
         var dominant_frequency = test_frequencies[maximum_index];
         document.getElementById("note-name").textContent = dominant_frequency.name;
         document.getElementById("frequency").textContent = dominant_frequency.frequency;
@@ -174,7 +181,7 @@ export class TunerPage {
       }
     }
   }
-  
+
 
   reset_recorded_notes() {
     clearBox("scalePrinter");
@@ -184,12 +191,12 @@ export class TunerPage {
     let music_notes_to_return = [];
     console.log("scale: " + scale);
     let root: number = this.scales.music_notes.indexOf(scale[0]);
-  
+
     //if the chord has a #, it starts at 1 + the index of the letter
     if (scale[1] == "#") {
       root = root + 1;
     }
-  
+
     music_notes_to_return.push(this.scales.music_notes[root]);
     if (scale.includes("major pentatonic")) {
       console.log("major pentatonic");
@@ -197,7 +204,7 @@ export class TunerPage {
       music_notes_to_return.push(this.scales.music_notes[(root + 4) % 12]);
       music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
       music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
-  
+
     }
     else if (scale.includes("dorian")) {
       console.log("dorian");
@@ -209,7 +216,7 @@ export class TunerPage {
       music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
     }
     else if (scale.includes("phrygian")) {
-  
+
       console.log("phrygian");
       music_notes_to_return.push(this.scales.music_notes[(root + 1) % 12]);
       music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
@@ -271,7 +278,7 @@ export class TunerPage {
       music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
       music_notes_to_return.push(this.scales.music_notes[(root + 9) % 12]);
       music_notes_to_return.push(this.scales.music_notes[(root + 11) % 12]);
-  
+
     }
     else if (scale.includes("minor pentatonic")) {
       console.log("minor pentatonic");
@@ -280,7 +287,7 @@ export class TunerPage {
       music_notes_to_return.push(this.scales.music_notes[(root + 7) % 12]);
       music_notes_to_return.push(this.scales.music_notes[(root + 10) % 12]);
     }
-  
+
     else if (scale.includes("blues minor")) {
       console.log("blues minor");
       music_notes_to_return.push(this.scales.music_notes[(root + 3) % 12]);
@@ -334,28 +341,28 @@ export class TunerPage {
     var para = document.createElement("h3");
     para.appendChild(document.createTextNode("Scales Containing Your Notes: "));
     document.getElementById("scalePrinter").appendChild(para);
-  
+
     // Create the list element:
     var list = document.createElement('ul');
     list.classList.add("list-group")
-  
+
     for (var i = 0; i < these_scales.length; i++) {
       // Create the list item:
       var item = document.createElement('li');
       item.classList.add("list-group-item");
-  
+
       // Set its contents:
       item.appendChild(document.createTextNode(these_scales[i]));
       let these_notes = this.scale_to_notes(these_scales[i]);
       for (let i = 0; i < these_notes.length; i++) {
         item.appendChild(document.createTextNode(" - " + these_notes[i]));
       }
-  
+
       // Add it to the list:
       list.appendChild(item);
     }
     document.getElementById('scalePrinter').appendChild(list);
-  
+
     // Finally, return the constructed list:
     return list;
   }
@@ -431,7 +438,7 @@ export class TunerPage {
           containing_scales.push(this.scales.minor_bebop_scales[i][0] + " bebop minor");
         }
       }
-      console.log("containing : "+containing_scales);
+      console.log("containing : " + containing_scales);
       //sends the containing scales list to be written to html and displayed
       this.write_scale_to_html(containing_scales);
       isRecording = false;

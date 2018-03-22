@@ -16,9 +16,7 @@
 <ion-content padding>
 
     <div class="container">
-        <ul class="flex-container wrap">
-
-
+        <ul class="flex-container wrap find-scales">
             <div class="row">
                 <div class="col-md-4">
                     Text
@@ -26,39 +24,254 @@
             </div>
 
 
-            <div class="row">
+            <div class="row individual-notes ">
                 <div class="col-md-12">
                     Individual Notes
                 </div>
                 <div class="col-md-12">
-                    Buttons
+                    <ion-buttons>
+                        <button ion-button round id="A">A</button>
+                        <button ion-button round id="Asharp">A#</button>
+                        <button ion-button round id="B">B</button>
+                        <button ion-button round id="C">C</button>
+                        <button ion-button round id="Csharp">C#</button>
+                        <button ion-button round id="D">D</button>
+                        <button ion-button round id="Dsharp">D#</button>
+                        <button ion-button round id="E">E</button>
+                        <button ion-button round id="F">F</button>
+                        <button ion-button round id="Fsharp">F#</button>
+                        <button ion-button round id="G">G</button>
+                        <button ion-button round id="Gsharp">G#</button>
+                    </ion-buttons>
                 </div>
             </div>
 
 
-            <div class="row">
+            <div class="row chords">
+                <div class="col-md-12">
+                    Chords
+                </div>
 
                 <div class="col-md-4">
                     <div class="row">
-                        <div class="col">Column</div>
-                        <div class="col">Column</div>
+                        <div class="col">
+                            <p class="scales">Major</p>
+                            <ion-buttons>
+                                <button ion-button round id="AMajorChord">A</button>
+                                <button ion-button round id="ASharpMajorChord">A#</button>
+                                <button ion-button round id="BMajorChord">B</button>
+                                <button ion-button round id="CMajorChord">C</button>
+                                <button ion-button round id="CSharpMajorChord">C#</button>
+                                <button ion-button round id="DMajorChord">D</button>
+                                <button ion-button round id="DSharpMajorChord">D#</button>
+                                <button ion-button round id="EMajorChord">E</button>
+                                <button ion-button round id="FMajorChord">F</button>
+                                <button ion-button round id="FSharpMajorChord">F#</button>
+                                <button ion-button round id="GMajorChord">G</button>
+                                <button ion-button round id="GSharpMajorChord">G#</button>
+                            </ion-buttons>
+                        </div>
+                        <div class="col">
+                            <p class="scales">Minor</p>
+                            <ion-buttons>
+                                <button ion-button round id="AMajorChord">A</button>
+                                <button ion-button round id="ASharpMajorChord">A#</button>
+                                <button ion-button round id="BMajorChord">B</button>
+                                <button ion-button round id="CMajorChord">C</button>
+                                <button ion-button round id="CSharpMajorChord">C#</button>
+                                <button ion-button round id="DMajorChord">D</button>
+                                <button ion-button round id="DSharpMajorChord">D#</button>
+                                <button ion-button round id="EMajorChord">E</button>
+                                <button ion-button round id="FMajorChord">F</button>
+                                <button ion-button round id="FSharpMajorChord">F#</button>
+                                <button ion-button round id="GMajorChord">G</button>
+                                <button ion-button round id="GSharpMajorChord">G#</button>
+                            </ion-buttons>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="row">
-                        <div class="col">Column</div>
-                        <div class="col">Column</div>
+                        <div class="col">
+                            <p class="scales">7th</p>
+                            <ion-buttons>
+                                <button ion-button round id="AMajorChord">A</button>
+                                <button ion-button round id="ASharpMajorChord">A#</button>
+                                <button ion-button round id="BMajorChord">B</button>
+                                <button ion-button round id="CMajorChord">C</button>
+                                <button ion-button round id="CSharpMajorChord">C#</button>
+                                <button ion-button round id="DMajorChord">D</button>
+                                <button ion-button round id="DSharpMajorChord">D#</button>
+                                <button ion-button round id="EMajorChord">E</button>
+                                <button ion-button round id="FMajorChord">F</button>
+                                <button ion-button round id="FSharpMajorChord">F#</button>
+                                <button ion-button round id="GMajorChord">G</button>
+                                <button ion-button round id="GSharpMajorChord">G#</button>
+                            </ion-buttons>
+                        </div>
+                        <div class="col">
+                            <p class="scales">Maj7</p>
+                            <ion-buttons>
+                                <button ion-button round id="AMajorChord">A</button>
+                                <button ion-button round id="ASharpMajorChord">A#</button>
+                                <button ion-button round id="BMajorChord">B</button>
+                                <button ion-button round id="CMajorChord">C</button>
+                                <button ion-button round id="CSharpMajorChord">C#</button>
+                                <button ion-button round id="DMajorChord">D</button>
+                                <button ion-button round id="DSharpMajorChord">D#</button>
+                                <button ion-button round id="EMajorChord">E</button>
+                                <button ion-button round id="FMajorChord">F</button>
+                                <button ion-button round id="FSharpMajorChord">F#</button>
+                                <button ion-button round id="GMajorChord">G</button>
+                                <button ion-button round id="GSharpMajorChord">G#</button>
+                            </ion-buttons>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="row">
-                        <div class="col">Column</div>
-                        <div class="col">Column</div>
+                        <div class="col">
+                            <p class="scales">Minor 7</p>
+                            <ion-buttons>
+                                <button ion-button round id="AMajorChord">A</button>
+                                <button ion-button round id="ASharpMajorChord">A#</button>
+                                <button ion-button round id="BMajorChord">B</button>
+                                <button ion-button round id="CMajorChord">C</button>
+                                <button ion-button round id="CSharpMajorChord">C#</button>
+                                <button ion-button round id="DMajorChord">D</button>
+                                <button ion-button round id="DSharpMajorChord">D#</button>
+                                <button ion-button round id="EMajorChord">E</button>
+                                <button ion-button round id="FMajorChord">F</button>
+                                <button ion-button round id="FSharpMajorChord">F#</button>
+                                <button ion-button round id="GMajorChord">G</button>
+                                <button ion-button round id="GSharpMajorChord">G#</button>
+                            </ion-buttons>
+                        </div>
+                        <div class="col">
+                            <p class="scales">Minor Major 7</p>
+                            <ion-buttons>
+                                <button ion-button round id="AMajorChord">A</button>
+                                <button ion-button round id="ASharpMajorChord">A#</button>
+                                <button ion-button round id="BMajorChord">B</button>
+                                <button ion-button round id="CMajorChord">C</button>
+                                <button ion-button round id="CSharpMajorChord">C#</button>
+                                <button ion-button round id="DMajorChord">D</button>
+                                <button ion-button round id="DSharpMajorChord">D#</button>
+                                <button ion-button round id="EMajorChord">E</button>
+                                <button ion-button round id="FMajorChord">F</button>
+                                <button ion-button round id="FSharpMajorChord">F#</button>
+                                <button ion-button round id="GMajorChord">G</button>
+                                <button ion-button round id="GSharpMajorChord">G#</button>
+                            </ion-buttons>
+                        </div>
                     </div>
                 </div>
 
+                <div class="col-md-8 find-scale-button">
+                    <button ion-button full id="">Find Scale</button>
+
+                </div>
+            </div>
+        </ul>
+
+        <ul class="flex-container wrap view-notes-in-scale">
+            <div class="row individual-notes">
+                <div class="col-md-12">
+                    Choose Key and Scale Type to View Notes In Scale
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <ion-list-header>
+                                    Language
+                                </ion-list-header>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <ion-list radio-group>
+                                                <ion-item>
+                                                    <ion-label>Go</ion-label>
+                                                    <ion-radio checked="true" value="go"></ion-radio>
+                                                </ion-item>
+
+                                                <ion-item>
+                                                    <ion-label>Rust</ion-label>
+                                                    <ion-radio value="rust"></ion-radio>
+                                                </ion-item>
+
+                                                <ion-item>
+                                                    <ion-label>Python</ion-label>
+                                                    <ion-radio value="python" disabled="true"></ion-radio>
+                                                </ion-item>
+                                            </ion-list>
+                                        </div>
+                                        <div class="col-sm-6">.col-sm-4</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">.col-sm-4</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <ion-list-header>
+                                    Language
+                                </ion-list-header>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <ion-list radio-group>
+
+                                                <!-- <label class="btn btn-primary">
+                                                            <input type="radio" name="radioscalebutton" id="major" checked> Major
+                                                          </label>
+                                                <label class="btn btn-primary">
+                                                            <input type="radio" name="radioscalebutton" id="minor"> Minor
+                                                          </label>
+                                                <label class="btn btn-primary">
+                                                            <input type="radio" name="radioscalebutton" id="major_p"> Major Pentatonic
+                                                          </label>
+                                                <label class="btn btn-primary">
+                                                              <input type="radio" name="radioscalebutton" id="minor_p"> Minor Pentatonic
+                                                          </label> -->
+
+
+                                                <ion-item>
+                                                    <ion-label>Major</ion-label>
+                                                    <ion-radio checked="true" value="major" name="radioscalebutton" id="major"></ion-radio>
+                                                </ion-item>
+
+                                                <ion-item>
+                                                    <ion-label>Minor</ion-label>
+                                                    <ion-radio value="minor" name="radioscalebutton" id="minor"></ion-radio>
+                                                </ion-item>
+
+                                                <ion-item>
+                                                    <ion-label>Major Pentatonic</ion-label>
+                                                    <ion-radio value="major-pentatonic" name="radioscalebutton" id="major_p"></ion-radio>
+                                                </ion-item>
+                                                <ion-item>
+                                                    <ion-label> Minor Pentatonic</ion-label>
+                                                    <ion-radio value="minor-pentatonic" name="radioscalebutton" id="minor_p"></ion-radio>
+                                                </ion-item>
+                                            </ion-list>
+                                        </div>
+                                        <div class="col-sm-6">.col-sm-4</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">.col-sm-4</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    Buttons
+                </div>
+                <div class="col-md-12">
+                    View Notes In Scale
+                </div>
             </div>
         </ul>
     </div>
@@ -269,7 +482,7 @@
             </label>
     </div>
     <p></p>
-    <div class="btn-group" data-toggle="buttons" id="choosescaleforscale">
+    <!-- <div class="btn-group" data-toggle="buttons" id="choosescaleforscale">
         <label class="btn btn-primary">
             <input type="radio" name="radioscalebutton" id="major" checked> Major
           </label>
@@ -282,7 +495,7 @@
         <label class="btn btn-primary">
               <input type="radio" name="radioscalebutton" id="minor_p"> Minor Pentatonic
           </label>
-    </div>
+    </div> -->
 
 
     <button id="shownotesinscale" class="btn btn-outline-primary btn-lg">View Notes in Scale</button>
